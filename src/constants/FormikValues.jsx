@@ -189,8 +189,8 @@ const FormikValues = () =>{
         .min(3, 'El nombre debe contener mínimo 3 caracteres.'),
         descripcion: Yup.string()
         .required('La descripcion es obligatoria.')
-        .max(30, 'La descripción no debe contener mas de 30 caracteres.')
-        .min(3, 'La descripción debe contener mínimo 3 caracteres.'),
+        .max(30, 'La descripción no debe contener mas de 230 caracteres.')
+        .min(10, 'La descripción debe contener mínimo 10 caracteres.'),
         duracion: Yup.string()
         .required('El la duración es obligatoria')
         .matches(/^[0-9]+$/, 'El teléfono solo puede contener números'),
@@ -204,24 +204,28 @@ const FormikValues = () =>{
     edit:{
       initialValues: (values)=>({
         nombre: values?.nombre ?? null,
-        telefono: values?.telefono ?? null,
-        categoria: values?.categoria ?? null,
-        club: values?.categoria && getClubId(values.clubId),
-        escudo: values?.escudo?? null,
-        iditem: values?.id?? null
+        descripcion: values?.descripcion ?? null,
+        duracion: values?.duracion?? null,
+        tipoCarga: values?.carga?? null,
+        tipoIntensidad: values?.intensidad ?? null,
+        id: values?.id?? null
       }),
       validationSchema:Yup.object({
         nombre: Yup.string()
         .required('El nombre es obligatorio.')
         .max(30, 'El nombre no debe contener mas de 30 caracteres.')
         .min(3, 'El nombre debe contener mínimo 3 caracteres.'),
-        telefono: Yup.string()
-        .required('El teléfono es obligatorio')
+        descripcion: Yup.string()
+        .required('La descripcion es obligatoria.')
+        .max(30, 'La descripción no debe contener mas de 30 caracteres.')
+        .min(10, 'La descripción debe contener mínimo 10 caracteres.'),
+        duracion: Yup.string()
+        .required('El la duración es obligatoria')
         .matches(/^[0-9]+$/, 'El teléfono solo puede contener números'),
         //.min(7, 'El teléfono debe contener 7 caracteres')
         //.max(7, 'El teléfono debe contener 7 caracteres'),
-        categoria: Yup.string().required("Selecciona una categoría"),
-        club: Yup.string().required("Selecciona un club"),
+        tipoCarga: Yup.string().required("Selecciona una categoría"),
+        tipoIntensidad: Yup.string().required("Selecciona una intensidad"),
       })
 
     }

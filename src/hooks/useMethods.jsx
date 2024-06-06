@@ -31,13 +31,13 @@ export const useMethods = () =>{
       await fetchMethod();
     } catch (error) {
       console.log(error)
-      throw error
+      throw error.response.data.message
     }
   };
 
-  const fetchUpdateMethod = async (nombre, descripcion, carga, intensidad, duracion) => {
+  const fetchUpdateMethod = async (id,nombre, descripcion, carga, intensidad, duracion) => {
     try {
-      await updateMethod(nombre, descripcion, carga, intensidad, duracion);
+      await updateMethod(id,nombre, descripcion, carga, intensidad, duracion);
       await fetchMethod();
     } catch (error) {
       throw error.response.data.message

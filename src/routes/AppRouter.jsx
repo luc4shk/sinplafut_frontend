@@ -10,6 +10,7 @@ import NavBar from "@/components/ui/navbar"
 import Form from "@/components/forms/Form"
 import Entrenamientos from "@/pages/admin/Entrenamientos"
 import Metodos from "@/pages/admin/Metodos"
+import Session from "@/pages/admin/Session"
 
 const AppRouter = () =>{
 
@@ -35,6 +36,7 @@ const AppRouter = () =>{
           <Route path="/adminPanel/cuerpoTecnico" element={<HomeAdmin/>}/>
           <Route path="/adminPanel/personal" element={<HomeAdmin/>}/>
           <Route path="/adminPanel/metodos" element={<Metodos/>}/>
+          <Route path="/adminPanel/sesiones" element={<Session/>}/>
         </Route>
       </Routes>
     </Router>

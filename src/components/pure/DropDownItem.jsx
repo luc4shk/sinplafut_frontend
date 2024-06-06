@@ -67,7 +67,7 @@ const DropDownItem = ({images,titleEdit, descEdit,titleDelete,descDelete,itemId,
                     validationSchema={values?.edit.validationSchema}
                     onSubmit={onSubmit.edit}
                     inputs={inputs}
-                    imgNombre={images.form}
+                    imgNombre={images?.form}
                     isEdit
                   />
                 </>

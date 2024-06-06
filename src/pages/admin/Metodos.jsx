@@ -1,5 +1,8 @@
-import React from "react";
-import Container from "@/components/ui/container";
+import React from "react"; import Container from "@/components/ui/container";
+import Form from "@/components/forms/Form";
+import { Button } from "@/components/ui/button";
+import { Inputs } from "@/constants/Inputs";
+import FormikValues from "@/constants/FormikValues";
 import {
   Dialog,
   DialogContent,
@@ -8,30 +11,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-import { ArrowUpDown, MoreHorizontal} from "lucide-react";
-import Form from "@/components/forms/Form";
-import { Inputs } from "@/constants/Inputs";
-import { Button } from "@/components/ui/button";
-import FormikValues from "@/constants/FormikValues";
+import { ArrowUpDown } from "lucide-react";
 import {DataTable} from "@/components/ui/data-table";
 import { useMethods } from "@/hooks/useMethods";
 import { toast } from "react-hot-toast";
+import DropDownItem from "@/components/pure/DropDownItem";
 
 
 const Metodos = () =>{
 
-  const {METODO_INPUTS} = Inputs()
+  const {METODO_INPUTS, METODO_INPUTS_EDIT} = Inputs()
   const {METODO}= FormikValues()
-  const dataFormValues = METODO
   const metodo = useMethods()
 
 
@@ -49,7 +39,33 @@ const Metodos = () =>{
         }
       )
 
-    )
+    ),
+    edit:({id,nombre, descripcion, tipoCarga, tipoIntensidad, duracion})=>{
+      const numberDur = parseInt(duracion)
+      console.log(id,nombre, descripcion,tipoCarga,tipoIntensidad,numberDur)
+      toast.promise(
+
+        metodo.fetchUpdateMethod(id,nombre, descripcion, tipoCarga, tipoIntensidad, numberDur),
+        {
+          loading:"Editando Método",
+          success:()=>{
+            metodo.setOpenEdit(false)
+            return "Método editado con éxito"
+          },
+          error:(error)=>error,
+        }
+      )
+    },
+    delete: (id)=>{
+      toast.promise(
+        metodo.fetchDeleteMethod(id),
+        {
+          loading:"Eliminando Método",
+          success:"Método eliminado con éxito",
+          error:(error)=>error,
+        }
+      )
+    }
   }
 
   const columns = [
@@ -82,90 +98,63 @@ const Metodos = () =>{
 
       //}
     },
-    /*{
-    id: "actions",
-    enableHiding: false,
-    cell: ({row}) => {
-      const payment = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    }
-  }*/
-    {
+      {
       accessorKey: "carga",
-      header: "Carga",
+      header:"Carga"
 
     },
     {
       accessorKey: "intensidad",
-      header: "Intensidad",
+      header: "Intensidad"
     },
     {
       accessorKey: "duracion",
       header: "Duración",
     },
     {
-    id: "actions",
-    enableHiding: false,
-    cell: ({row}) => {
-      const payment = row.original
+      id: "actions",
+      enableHiding: false,
+      cell: ({row}) => {
+        const metodo = useMethods()
+        return (
+          <DropDownItem
+          itemId={row.original.id} 
+          onSubmit={onSubmit}
+          buscarPorId={metodo.fetchMethodById}
+          isLoadingDetails={metodo.isLoadingDetails}
+          values={METODO}
+          dataFromHook={metodo}
+          titleEdit={"Editar Método"}
+          descEdit={"Edita los campos para modificar tu método"}
+          titleDelete={"¿Estás seguro?"}
+          descDelete={"Se eleminará el método "}
+          inputs={METODO_INPUTS_EDIT}
+          images={""}
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    }
+          />
+          
+        )
+      }
     }
   ]
 
   return(
     <Container>
-      <Dialog >
+      <Dialog open={metodo.openAdd} onOpenChange={metodo.setOpenAdd}>
         <DialogTrigger asChild>
-          <Button variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">Añadir Método</Button>
+          <Button onClick={()=>metodo.setOpenAdd(true)}  variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">Añadir Método</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Añadir Método</DialogTitle>
             <DialogDescription>
-              Rellena los campos para editar tu método
+              Rellena los campos para agregar tu método
             </DialogDescription>
           </DialogHeader>
           <Form
             onSubmit={onSubmit.add}
-            initialValues={dataFormValues?.add.initialValues}
-            validationSchema={dataFormValues?.add.validationSchema}
+            initialValues={METODO?.add.initialValues}
+            validationSchema={METODO?.add.validationSchema}
             inputs={METODO_INPUTS}
           />
         </DialogContent>

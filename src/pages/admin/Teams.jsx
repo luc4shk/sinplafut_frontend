@@ -62,7 +62,7 @@ const Teams = () =>{
   const titleEdit = "Editar Equipo"
   const descEdit = "Rellena los campos para editar tu equipo"
   const titleDelete = "Eliminar Equipo"
-  const descDelete = "Esta acción eliminar al equipo "
+  const descDelete = "Esta acción eliminará al equipo "
 
   return(
     <CardList 

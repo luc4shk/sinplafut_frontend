@@ -1,4 +1,3 @@
-import NavBar from "@/components/ui/navbar";
 import React from "react";
 import {
   Card,
@@ -9,15 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Container from "@/components/ui/container";
-import {Skeleton} from "@/components/ui/skeleton";
 
 
 const HomeAdmin = () =>{
-  const notify = () => toast("Wow so easy !");
   return(
     <>
       <Container>
-        <button onClick={notify}>Omgggg</button>
         <div className="grid grid-cols-3 gap-8">
           {
             Array.from({length:5}, (v,i)=>(

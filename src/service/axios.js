@@ -28,9 +28,20 @@ const metodo = axios.create({
   }
 })
 
+//Creamos la instancia para las sesiones
+const sesion = axios.create({
+  baseURL: "http://localhost:8080/plan-entrenamiento-service/sesion",
+  timeout: 6000,
+  headers: {
+    "Content-Type": "application/json",
+  }
+})
+
+
 //Exportamos las instancias para que sean accesbiles
 export {
   club,
   team,
-  metodo
+  metodo,
+  sesion
 }

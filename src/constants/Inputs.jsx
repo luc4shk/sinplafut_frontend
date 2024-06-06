@@ -160,10 +160,56 @@ const CLUB_INPUTS = [
     }
   ]
 
+const METODO_INPUTS_EDIT= [
+    {
+      name:"nombre",
+      type:"text",
+      place:"Nombre"
+    },
+    {
+      name:"descripcion",
+      type:"text",
+      place:"Descripción"
+    },
+    {
+      name:"duracion",
+      type:"text",
+      estilos:"hidden",
+      place:"Duración en minutos"
+    },
+    {
+      isSelect:true,
+      name:"tipoCarga",
+      estilosSel:"w-full border rounded-md p-2",
+      estilos:"col-span-2",
+      element:
+        <>        
+        <option value={""} selected disabled hidden>Tipo de Carga</option>
+        <option value={"ligera"}>Ligera</option>
+        <option value={"media"}>Media</option>
+        <option value={"pesada"}>Pesada</option>
+        </>
+    },
+    {
+      isSelect:true,
+      name:"tipoIntensidad",
+      estilosSel:"w-full border rounded-md p-2",
+      estilos:"col-span-2",
+      element:
+        <>        
+        <option value={""} selected disabled hidden>Tipo de Intensidad</option>
+        <option value={"baja"}>Baja</option>
+        <option value={"media"}>Media</option>
+        <option value={"alta"}>Alta</option>
+        </>
+    }
+  ]
+
   return{
     TEAM_INPUTS,
     CLUB_INPUTS,
     METODO_INPUTS,
+    METODO_INPUTS_EDIT
   }
 
 }
