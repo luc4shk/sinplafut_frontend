@@ -70,7 +70,7 @@ export const useClubs = () => {
       console.log(response.data.data)
       setIsLoadingDetails(true)
     } catch (error) {
-      console.error(`Error fetching club with id ${id}:`, error);
+      throw error.response.data.message
     } finally {
       setIsLoadingDetails(false);
     }
@@ -84,7 +84,7 @@ export const useClubs = () => {
       console.log(response.data.data)
       setIsLoadingDetails(true)
     } catch (error) {
-      console.error(`Error fetching teams with id ${id}:`, error);
+      throw error.response.data.message
     } finally {
       setIsLoadingDetails(false);
     }

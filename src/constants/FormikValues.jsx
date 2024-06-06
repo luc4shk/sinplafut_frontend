@@ -192,12 +192,12 @@ const FormikValues = () =>{
         .max(30, 'La descripción no debe contener mas de 30 caracteres.')
         .min(3, 'La descripción debe contener mínimo 3 caracteres.'),
         duracion: Yup.string()
-        .required('El teléfono es obligatorio')
-        .matches(/^[0-9]+$/, 'El teléfono solo puede contener números')
-        .min(7, 'El teléfono debe contener 7 caracteres')
-        .max(7, 'El teléfono debe contener 7 caracteres'),
+        .required('El la duración es obligatoria')
+        .matches(/^[0-9]+$/, 'El teléfono solo puede contener números'),
+        //.min(7, 'El teléfono debe contener 7 caracteres')
+        //.max(7, 'El teléfono debe contener 7 caracteres'),
         tipoCarga: Yup.string().required("Selecciona una categoría"),
-        tipoIntensidad: Yup.string().required("Selecciona un club"),
+        tipoIntensidad: Yup.string().required("Selecciona una intensidad"),
       })
 
     },
@@ -230,7 +230,8 @@ const FormikValues = () =>{
   return{
     LOGIN,
     CLUB,
-    TEAM
+    TEAM,
+    METODO
   }
 }
 

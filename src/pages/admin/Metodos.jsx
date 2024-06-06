@@ -23,32 +23,34 @@ import { Inputs } from "@/constants/Inputs";
 import { Button } from "@/components/ui/button";
 import FormikValues from "@/constants/FormikValues";
 import {DataTable} from "@/components/ui/data-table";
+import { useMethods } from "@/hooks/useMethods";
+import { toast } from "react-hot-toast";
+
 
 const Metodos = () =>{
 
   const {METODO_INPUTS} = Inputs()
   const {METODO}= FormikValues()
-  const titleAdd = "Titulo"
-  const descAdd = "Descipción"
   const dataFormValues = METODO
+  const metodo = useMethods()
 
-  const data = [
-    {
-      nombre: "Método 1",
-      descripcion: "Este Metodo...",
-      carga: "Ligera",
-      intensidad: "Baja",
-      duracion: "1:00:00",
-    },
-    {
-      nombre: "Método 2",
-      descripcion: "Este Metodo...",
-      carga: "Ligera",
-      intensidad: "Baja",
-      duracion: "1:00:00",
-    },
 
-  ]
+  const onSubmit = {
+
+    add:({nombre, descripcion, tipoCarga, tipoIntensidad, duracion})=>(
+      toast.promise(
+        metodo.fetchAddMethod(nombre, descripcion, tipoCarga, tipoIntensidad, duracion),
+        {
+          loading: 'Añadiendo Metodo',
+          success: ()=>{
+            metodo.setOpenAdd(false)
+            return'Metodo añadido con éxito 👌'},
+          error:(error)=> error+"",
+        }
+      )
+
+    )
+  }
 
   const columns = [
 
@@ -151,25 +153,24 @@ const Metodos = () =>{
     <Container>
       <Dialog >
         <DialogTrigger asChild>
-          <Button variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">{titleAdd}</Button>
+          <Button variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">Añadir Método</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>{titleAdd}</DialogTitle>
+            <DialogTitle>Añadir Método</DialogTitle>
             <DialogDescription>
-              {descAdd}
+              Rellena los campos para editar tu método
             </DialogDescription>
           </DialogHeader>
           <Form
-            //onSubmit={onSubmit}
+            onSubmit={onSubmit.add}
             initialValues={dataFormValues?.add.initialValues}
             validationSchema={dataFormValues?.add.validationSchema}
             inputs={METODO_INPUTS}
-            //imgNombre={imageName==="logoUrl"?"imagen":"escudo"}
           />
         </DialogContent>
       </Dialog>
-      <DataTable columns={columns} data={data} placeholderSearch={"Buscar por nombre"} searchName={"nombre"}/>
+      <DataTable columns={columns} data={metodo.metodos} placeholderSearch={"Buscar por nombre"} searchName={"nombre"}/>
     </Container>
   )
 }

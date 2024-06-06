@@ -24,7 +24,7 @@ const metodo = axios.create({
   baseURL: "http://localhost:8080/plan-entrenamiento-service/metodo",
   timeout: 6000,
   headers: {
-    "Content-Type": "multipart/form-data"
+    "Content-Type": "application/json",
   }
 })
 

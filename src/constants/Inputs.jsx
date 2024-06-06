@@ -122,7 +122,7 @@ const CLUB_INPUTS = [
       place:"Nombre"
     },
     {
-      name:"descripción",
+      name:"descripcion",
       type:"text",
       place:"Descripción"
     },
