@@ -12,11 +12,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Inputs } from "@/constants/Inputs";
+import FormikValues from "@/constants/FormikValues";
 
 
 const Entrenamientos = () =>{
 
   //Nombre, Descripción, fecha de inicio, hora, duracion, tipodesesion {select},equipo, metodos de entrenamiento
+  //
 
   const data = [
     {
@@ -127,29 +130,13 @@ const Entrenamientos = () =>{
 
   ]
 
+      //<Dialog open={dataFromHook.openAdd} onOpenChange={dataFromHook.setOpenAdd}>
+      //<Button onClick={()=>buttonHandleClick()}variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">{titleAdd}</Button>
+
+
   return(
 
     <Container>
-      <Dialog open={dataFromHook.openAdd} onOpenChange={dataFromHook.setOpenAdd}>
-        <DialogTrigger asChild>
-          <Button onClick={()=>buttonHandleClick()}variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">{titleAdd}</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>{titleAdd}</DialogTitle>
-            <DialogDescription>
-              {descAdd}
-            </DialogDescription>
-          </DialogHeader>
-          <Form
-            onSubmit={onSubmit}
-            initialValues={dataFormValues?.add.initialValues}
-            validationSchema={dataFormValues?.add.validationSchema}
-            inputs={inputs}
-            imgNombre={imageName==="logoUrl"?"imagen":"escudo"}
-          />
-        </DialogContent>
-      </Dialog>
 
       <Button variant="outline">Añadir Entrenamiento</Button>
       <DataTable columns={columns} data={data} placeholderSearch={"Busqueda por nombre"}/>

@@ -18,7 +18,7 @@ import DropDownItem from "./DropDownItem"
 
 import { TEAM_INFO} from "@/constants/InfoCards";
 import ClubInfoItem from "./ClubInfoItem"
-const ItemCard = ({imgName,item_data,values,dataFromHook,titleDelete,titleEdit, descEdit,imagen, title, desc, itemId, onSubmitEdit, onSubmitDelete, buscarPorId, descDelete, item_info, inputs}) =>{
+const ItemCard = ({images,item_data,values,dataFromHook,titleDelete,titleEdit, descEdit,imagen, title, desc, itemId, onSubmit, buscarPorId, descDelete, item_info, inputs}) =>{
 
 
 
@@ -41,8 +41,7 @@ const ItemCard = ({imgName,item_data,values,dataFromHook,titleDelete,titleEdit, 
         </div>
          <DropDownItem 
           itemId={itemId} 
-          onSubmitEdit={onSubmitEdit}
-          onSubmitDelete={onSubmitDelete}
+          onSubmit={onSubmit}
           buscarPorId={buscarPorId}
           isLoadingDetails={dataFromHook.isLoadingDetails}
           values={values}
@@ -52,14 +51,14 @@ const ItemCard = ({imgName,item_data,values,dataFromHook,titleDelete,titleEdit, 
           titleDelete={titleDelete}
           descDelete={descDelete}
           inputs={inputs}
-          imgName={imgName}
+          images={images}
         />
              </CardHeader>
       <Separator/>
       <CardContent className="flex flex-col mt-6 gap-4">
         {
           item_info.map((item, index) => (
-          <ClubInfoItem icon={item.icon} text={item.text(item_data)}/>
+          <ClubInfoItem key={index} icon={item.icon} text={item.text(item_data)}/>
           ))
         }
       </CardContent>

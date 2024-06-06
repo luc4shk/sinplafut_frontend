@@ -28,40 +28,43 @@ const Clubes = () =>{
   const { CLUB } = FormikValues()
   const { CLUB_INPUTS} = Inputs()
 
-  const onSubmit = ({nombre, direccion, telefono, ciudad, pais, estadio,imagen})=>{
-    const file = imagen[0]
-    toast.promise(
-      club.fetchAddClub(nombre, direccion, telefono, ciudad, pais, estadio,file),
-      {
-        loading: 'Añadiendo Club',
-        success: ()=>{
-          club.setOpenAdd(false)
-          return'Club añadido con éxito 👌'},
-        error:(error)=> error+"",
-      }
-    )
+  const images = {
+    form:"imagen",
+    data:"logoUrl"
   }
 
-  const onSubmitEdit = ({iditem,nombre, direccion, telefono, ciudad, pais, estadio,imagen})=>{
-    const file = imagen[0]
-    console.log("aaaa",iditem,nombre, direccion, telefono, ciudad, pais, estadio,file)
+  const onSubmit={
+    add:({nombre, direccion, telefono, ciudad, pais, estadio,imagen})=>{
+      const file = imagen[0]
+      toast.promise(
+        club.fetchAddClub(nombre, direccion, telefono, ciudad, pais, estadio,file),
+        {
+          loading: 'Añadiendo Club',
+          success: ()=>{
+            club.setOpenAdd(false)
+            return'Club añadido con éxito 👌'},
+          error:(error)=> error+"",
+        }
+      )
+    },
+    edit:({iditem,nombre, direccion, telefono, ciudad, pais, estadio,imagen})=>{
+      const file = imagen[0]
+      console.log("aaaa",iditem,nombre, direccion, telefono, ciudad, pais, estadio,file)
+      toast.promise(
+        club.fetchUpdateClub(iditem,nombre, direccion, telefono, ciudad, pais, estadio,file),
+        {
+          loading:"Editando Club",
+          success:()=>{
+            club.setOpenEdit(false)
+            return "Club editado con éxito"
+          },
+          error:(error)=>error,
+        }
+      )
+
+    },
+    delete:(id)=>
     toast.promise(
-      club.fetchUpdateClub(iditem,nombre, direccion, telefono, ciudad, pais, estadio,file),
-      {
-        loading:"Editando Club",
-        success:()=>{
-          club.setOpenEdit(false)
-          return "Club editado con éxito"
-        },
-        error:(error)=>error,
-      }
-    )
-
-  }
-
-  const onSubmitDelete = (id)=>
-    toast.promise(
-
       club.fetchDeleteClub(id),
       {
         loading:"Eliminando Club",
@@ -69,6 +72,8 @@ const Clubes = () =>{
         error: (error) => error
       }
     )
+
+  }
 
   const titleEdit = "Editar Equipo"
   const descEdit = "Rellena los campos para editar tu equipo"
@@ -78,84 +83,23 @@ const Clubes = () =>{
 
   return(
     <>
-    <CardList
-          dataFromHook={club}
-          data={club.clubes}
-          titleAdd={"Añadir Club"}
-          descAdd={"Completa los siguientes campos para poder agregar un club"}
-          dataFormValues={CLUB}
-          onSubmit={onSubmit}
-          onSubmitEdit={onSubmitEdit}
-          onSubmitDelete={onSubmitDelete}
-          buscarPorId={club.fetchClubById}
-          titleEdit={titleEdit}
-          descEdit={descEdit}
-          titleDelete={titleDelete}
-          descDelete={descDelete}
-          item_info={CLUB_INFO}
-          imageName="logoUrl"
-          inputs={CLUB_INPUTS}
-    />
-    {/*
-    <>
-      <Container>
-        <Dialog open={openAdd} onOpenChange={setOpenAdd}>
-          <DialogTrigger asChild>
-            <Button onClick={()=>setOpenAdd(true)}variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">Añadir Club</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Añadir Club</DialogTitle>
-              <DialogDescription>
-                Completa los siguientes campos para poder agregar un club
-              </DialogDescription>
-            </DialogHeader>
-            <FormClub  
-              onSubmit={(
-                {nombre, direccion, telefono, ciudad, pais, estadio,imagen}
-              )=>{
-                const file = imagen[0]
-                toast.promise(
-                  fetchAddClub(nombre, direccion, telefono, ciudad, pais, estadio,file),
-                  {
-                    loading: 'Añadiendo Club',
-                    success: ()=>{
-                      setOpenAdd(false)
-                      return'Club añadido con éxito 👌'},
-                    error:(error)=> error+"",
-                  }
-                )
-              }}
-              initialValues={CLUB.add.initialValues}
-              validationSchema={CLUB.add.validationSchema}
-            />
-          </DialogContent>
-        </Dialog>
-        <div className="grid  mt-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {
-            isLoading ? 
-              Array.from({length:8}).map((item,i)=>(
-                <SkeletonCard key={i}/>
-              ))
-              :
-              clubes.map((club)=>{
-                return(
-                  <ClubCard 
-                    key={club.id}  
-                    club={club} 
-                    eliminar={fetchDeleteClub} 
-                    buscarPorId={fetchClubById} 
-                    editar={fetchUpdateClub}
-                    values={values}
-                    isLoadingDetails={isLoadingDetails}
-                  /> 
-                )
-              })
-          }
-        </div>
-      </Container>
-      */}
-</>
+      <CardList
+        dataFromHook={club}
+        data={club.clubes}
+        titleAdd={"Añadir Club"}
+        descAdd={"Completa los siguientes campos para poder agregar un club"}
+        dataFormValues={CLUB}
+        onSubmit={onSubmit}
+        buscarPorId={club.fetchClubById}
+        titleEdit={titleEdit}
+        descEdit={descEdit}
+        titleDelete={titleDelete}
+        descDelete={descDelete}
+        item_info={CLUB_INFO}
+        images={images}
+        inputs={CLUB_INPUTS}
+      />
+    </>
   )
 
 }

@@ -16,7 +16,7 @@ import {
 import FormikValues from "@/constants/FormikValues";
 import Form from "../forms/Form";
 
-const CardList = ({imageName,dataFromHook,data,titleDelete, titleAdd , descAdd, descDelete,titleEdit,descEdit,dataFormValues, onSubmit, onSubmitEdit, onSubmitDelete, buscarPorId, item_info, inputs}) =>{
+const CardList = ({images,dataFromHook,data,titleDelete, titleAdd , descAdd, descDelete,titleEdit,descEdit,dataFormValues, onSubmit, buscarPorId, item_info, inputs}) =>{
 
 
 
@@ -38,44 +38,42 @@ const CardList = ({imageName,dataFromHook,data,titleDelete, titleAdd , descAdd, 
               </DialogDescription>
             </DialogHeader>
             <Form
-              onSubmit={onSubmit}
+              onSubmit={onSubmit.add}
               initialValues={dataFormValues?.add.initialValues}
               validationSchema={dataFormValues?.add.validationSchema}
               inputs={inputs}
-              imgNombre={imageName==="logoUrl"?"imagen":"escudo"}
+              imgNombre={images.form}
             />
             </DialogContent>
         </Dialog>
         <div className="grid  mt-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {
             dataFromHook.isLoading ? 
-              Array.from({length:8}).map((item,i)=>(
+              Array.from({length:8}).map((_,i)=>(
                 <SkeletonCard key={i}/>
               ))
               :
-              data.map((item)=>{
+              data.map((item,i)=>{
                 return(
-                  <>
                     <ItemCard 
+                      key={i}
                       item_data={item}
                       dataFromHook={dataFromHook}
                       itemId={item.id}
-                      imagen={item[imageName]}
+                      imagen={item[images.data]}
                       title={item.nombre}
                       titleEdit={titleEdit}
                       descEdit={descEdit}
                       titleDelete={titleDelete}
                       desc={item.nombre}
-                      onSubmitEdit={onSubmitEdit}
-                      onSubmitDelete={onSubmitDelete}
+                      onSubmit={onSubmit}
                       buscarPorId={buscarPorId}
                       values={dataFormValues}
                       descDelete={descDelete}
                       item_info={item_info}
-                      imgName={imageName}
+                      images={images}
                       inputs={inputs}
                     /> 
-                  </>
                 )
               })
 

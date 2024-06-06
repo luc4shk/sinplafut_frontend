@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-const Form = ({inputs,onSubmit,initialValues,imgNombre, validationSchema, isEdit=false}) =>{
+const Form = ({inputs,onSubmit,initialValues,imgNombre,validationSchema, isEdit=false}) =>{
 
 
   const {watch, handleSubmit, register, formState:{
@@ -23,7 +23,7 @@ const Form = ({inputs,onSubmit,initialValues,imgNombre, validationSchema, isEdit
     defaultValues:initialValues
   })
 
-  const {prev} = usePrevImage(watch, isEdit,imgNombre)
+  const {prev} = imgNombre ?  usePrevImage(watch, isEdit,imgNombre) : {}
   console.log(errors)
 
   return(

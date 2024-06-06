@@ -35,7 +35,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 
-export function DataTable({ columns, data , placeholderSearch}) {
+export function DataTable({ columns, data , placeholderSearch, searchName}) {
   const [sorting, setSorting]=useState([])
   const [columnVisibility, setColumnVisibility] = useState({})
   const [columnFilters, setColumnFilters]=useState([])
@@ -70,9 +70,9 @@ export function DataTable({ columns, data , placeholderSearch}) {
         <div className="flex items-center py-4 w-full">
           <Input
             placeholder={placeholderSearch}
-            value={table.getColumn("email")?.getFilterValue() ?? ""}
+            value={table.getColumn(searchName)?.getFilterValue() ?? ""}
             onChange={event =>
-                table.getColumn("email")?.setFilterValue(event.target.value)
+                table.getColumn(searchName)?.setFilterValue(event.target.value)
             }
             className="shadow-sm w-7/12"
           />

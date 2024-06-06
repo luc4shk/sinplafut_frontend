@@ -31,13 +31,9 @@ import {EllipsisVertical} from "lucide-react"
 import { Inputs } from "@/constants/Inputs"
 import { toast } from "react-hot-toast";
 
-const DropDownItem = ({imgName,titleEdit, descEdit,titleDelete,descDelete,itemId,dataFromHook, values, onSubmitEdit, onSubmitDelete, buscarPorId, inputs}) =>{
+const DropDownItem = ({images,titleEdit, descEdit,titleDelete,descDelete,itemId,dataFromHook, values, onSubmit, buscarPorId, inputs}) =>{
 
-  const { TEAM_INPUTS } = Inputs()
 
-  if(!dataFromHook.isLoadingDetails){
-    console.log(dataFromHook.values)
-  }
 
   return(
     <DropdownMenu >
@@ -69,9 +65,9 @@ const DropDownItem = ({imgName,titleEdit, descEdit,titleDelete,descDelete,itemId
                   <Form
                     initialValues={values?.edit.initialValues(dataFromHook.values)}
                     validationSchema={values?.edit.validationSchema}
-                    onSubmit={onSubmitEdit}
+                    onSubmit={onSubmit.edit}
                     inputs={inputs}
-                    imgNombre={imgName==="logoUrl"?"imagen":"escudo"}
+                    imgNombre={images.form}
                     isEdit
                   />
                 </>
@@ -93,7 +89,7 @@ const DropDownItem = ({imgName,titleEdit, descEdit,titleDelete,descDelete,itemId
             <AlertDialogFooter>
               <AlertDialogCancel>Cancelar</AlertDialogCancel>
               <AlertDialogAction
-                onClick={()=>onSubmitDelete(itemId)}
+                onClick={()=>onSubmit.delete(itemId)}
               >Eliminar</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

@@ -13,10 +13,7 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
 
@@ -38,10 +35,6 @@ const NavBar = () =>{
       to:"/adminPanel/equipos",
       text:"Equipos"
     },
-    {
-      to:"/adminPanel/entrenamientos",
-      text:"Entrenamientos"
-    }
   ]
 
   const menuItemsSidebar= [
@@ -57,6 +50,23 @@ const NavBar = () =>{
       to:"/adminPanel/entrenamientos",
       text:"Entrenamientos"
     },
+
+    {
+      to:"/adminPanel/macrociclos",
+      text:"Macrociclos"
+    },
+    {
+      to:"/adminPanel/microciclos",
+      text:"Microciclos"
+    },
+    {
+      to:"/adminPanel/metodos",
+      text:"Metodos"
+    },
+    {
+      to:"/adminPanel/sesiones",
+      text:"Sesiones"
+    },
     {
       to:"/adminPanel/jugadores",
       text:"Jugadores"
@@ -67,6 +77,7 @@ const NavBar = () =>{
       text:"Cuerpo Técnico"
 
     }
+
   ]
 
   //Links en el dropMenu
@@ -78,6 +89,31 @@ const NavBar = () =>{
     {
       to:"/adminPanel",
       text:"Cuerpo Técnico"
+    }
+
+  ]
+
+  const dropDownItemsPlan= [
+    {
+      to:"/adminPanel/entrenamientos",
+      text:"Entrenamientos"
+    },
+
+    {
+      to:"/adminPanel/macrociclos",
+      text:"Macrociclos"
+    },
+    {
+      to:"/adminPanel/microciclos",
+      text:"Microciclos"
+    },
+    {
+      to:"/adminPanel/metodos",
+      text:"Metodos"
+    },
+    {
+      to:"/adminPanel/sesiones",
+      text:"Sesiones"
     }
 
   ]
@@ -121,6 +157,8 @@ const NavBar = () =>{
         <p className="scroll-m-20 text-2xl font-bold tracking-tight">SINPLAFUT</p>
       </NavLink>
 
+
+
       {/*Links del Menú*/}
       <div className="sm:flex hidden flex gap-1 items-center text-gray-400 ">
         {
@@ -137,6 +175,32 @@ const NavBar = () =>{
             </div> 
           ))
         }
+
+      {/*DropMenu del Plan*/}
+        <NavigationMenu >
+          <NavigationMenuList >
+            <NavigationMenuItem >
+              <NavigationMenuTrigger className={"text-lg font-normal p-2 "}>Plan</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="flex flex-col items-left p-2 ">
+                  {dropDownItemsPlan.map((item, i)=>(
+                    <NavLink 
+                      key={i}
+                      to={item.to} 
+                      className={({isActive})=>
+                          `hover:bg-zinc-100 hover:text-black hover:text-black  text-gray-400 rounded-md p-2 radius-md ${isActive ? "text-black" : ""}`
+                      }>
+                      <NavigationMenuLink className={""}>
+                        {item.text}
+                      </NavigationMenuLink>
+                    </NavLink>
+                  ))} 
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+
 
         {/*DropMenu del Personal*/}
         <NavigationMenu >
@@ -162,6 +226,10 @@ const NavBar = () =>{
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+
+
+        
+
 
       </div>
 

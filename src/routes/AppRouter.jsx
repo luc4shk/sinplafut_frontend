@@ -9,6 +9,7 @@ import ClubDetalles from "@/pages/admin/ClubDetalles"
 import NavBar from "@/components/ui/navbar"
 import Form from "@/components/forms/Form"
 import Entrenamientos from "@/pages/admin/Entrenamientos"
+import Metodos from "@/pages/admin/Metodos"
 
 const AppRouter = () =>{
 
@@ -33,6 +34,7 @@ const AppRouter = () =>{
           <Route path="/adminPanel/entrenamientos" element={<Entrenamientos/>}/>
           <Route path="/adminPanel/cuerpoTecnico" element={<HomeAdmin/>}/>
           <Route path="/adminPanel/personal" element={<HomeAdmin/>}/>
+          <Route path="/adminPanel/metodos" element={<Metodos/>}/>
         </Route>
       </Routes>
     </Router>
