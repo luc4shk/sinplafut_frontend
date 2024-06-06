@@ -17,7 +17,7 @@ export const UserContextProvider = ({children}) =>{
   })
 
   //Estado para manejar el login 
-  const [isLogin, setLogin] = useState(false)
+  const [isLogin, setLogin] = useState(true)
 
 
 

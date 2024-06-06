@@ -16,6 +16,8 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { UserContext } from "@/context/UserContext";
+import { useContext } from "react";
 
 import { LogOut, SquareX} from "lucide-react";
 
@@ -25,6 +27,7 @@ import { LogOut, SquareX} from "lucide-react";
  **/
 const NavBar = () =>{
 
+  const {logOut} = useContext(UserContext)
   //Links individuales
   const menuItems = [
     {
@@ -238,7 +241,7 @@ const NavBar = () =>{
         className="rounded-md p-2 hover:bg-zinc-100 cursor-pointer"
         size={34}
         onClick={()=>{
-          alert("Sesión cerrada")
+          logOut()
         }}
       />
 
