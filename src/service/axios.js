@@ -19,8 +19,18 @@ const team = axios.create({
   }
 })
 
+//Creamos la instancia para los metodos
+const metodo = axios.create({
+  baseURL: "http://localhost:8080/plan-entrenamiento-service/metodo",
+  timeout: 6000,
+  headers: {
+    "Content-Type": "multipart/form-data"
+  }
+})
+
 //Exportamos las instancias para que sean accesbiles
 export {
   club,
-  team
+  team,
+  metodo
 }
