@@ -1,28 +1,17 @@
 import React, {useContext}from "react";
+import { UserContext } from "@/context/UserContext";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import * as yup from "yup"
-import { UserContext } from "@/context/UserContext";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
 import {ErrorMessage} from "@/components/ui/errorMessage";
+import { Separator } from "@/components/ui/separator";
 import FormikValues from "@/constants/FormikValues";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import Form from "@/components/forms/Form";
-import {Formik} from "formik";
 
 
 
@@ -30,7 +19,7 @@ import {Formik} from "formik";
 const Index = () =>{
 
   const { LOGIN } = FormikValues()
-  const {register,setValue,handleSubmit, 
+  const {register,handleSubmit, 
     formState: {
       errors
     }} = useForm({

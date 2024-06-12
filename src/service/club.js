@@ -75,7 +75,7 @@ const addClub = async (nombre, direccion, telefono, ciudad, pais, estadio, image
 
 const getTeamsById = async (id) => {
   try {
-    const response = await team.get(`/findTeams/${id}`)
+    const response = await club.get(`/findTeams/${id}`)
     return response
 
   } catch (e) {

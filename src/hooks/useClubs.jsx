@@ -6,6 +6,7 @@ export const useClubs = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [values, setValues] = useState({});
+  const [clubTeams, setClubTeams] = useState([]);
   const [openAdd,setOpenAdd]= useState(false)
   const [openEdit,setOpenEdit]= useState(false)
 
@@ -80,10 +81,11 @@ export const useClubs = () => {
     setIsLoadingDetails(true);
     try {
       const response = await getTeamsById(id);
-      setValues(response.data.data);
+      setClubTeams(response.data.data);
       console.log(response.data.data)
       setIsLoadingDetails(true)
     } catch (error) {
+      console.log(error)
       throw error.response.data.message
     } finally {
       setIsLoadingDetails(false);
@@ -105,6 +107,7 @@ export const useClubs = () => {
     setOpenAdd,
     openEdit,
     setOpenEdit,
+    clubTeams
   };
 };
 

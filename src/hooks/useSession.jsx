@@ -19,9 +19,11 @@ export const useSession = () =>{
       try {
       setIsLoading(true)
       const response = await getAllSessions();
+      console.log(response)
       setSessions(response.data.data);
     } catch (error) {
-      throw error.response.data.message
+      throw error
+      //.response.data.message
     } finally {
       setIsLoading(false);
     }
@@ -42,6 +44,7 @@ export const useSession = () =>{
       await deleteSession(id)
       await fetchSession()
     }catch(error){
+      console.log(error)
       throw error.response.data.message
     }
   }

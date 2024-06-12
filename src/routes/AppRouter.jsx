@@ -7,13 +7,13 @@ import ProtectedRoute from "./ProtectedRoute"
 import Clubes from "@/pages/admin/Clubes"
 import ClubDetalles from "@/pages/admin/ClubDetalles"
 import NavBar from "@/components/ui/navbar"
-import Form from "@/components/forms/Form"
 import Entrenamientos from "@/pages/admin/Entrenamientos"
 import Metodos from "@/pages/admin/Metodos"
 import Session from "@/pages/admin/Session"
 
 const AppRouter = () =>{
 
+  //Ruta Protegida con el NavBar
   const ProtectedRouteWithNavBar = ()=>{
     return (
       <>
@@ -30,7 +30,7 @@ const AppRouter = () =>{
         <Route element={<ProtectedRouteWithNavBar/>}>
           <Route path="/adminPanel" element={<HomeAdmin/>}/>
           <Route path="/adminPanel/clubes" element={<Clubes/>}/>
-          <Route path="/adminPanel/clubes/1" element={<ClubDetalles/>}/>
+          <Route path="/adminPanel/clubes/:id" element={<ClubDetalles/>}/>
           <Route path="/adminPanel/equipos" element={<Teams/>}/>
           <Route path="/adminPanel/entrenamientos" element={<Entrenamientos/>}/>
           <Route path="/adminPanel/cuerpoTecnico" element={<HomeAdmin/>}/>

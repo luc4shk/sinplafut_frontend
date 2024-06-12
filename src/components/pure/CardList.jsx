@@ -1,10 +1,8 @@
 import React from "react";
 import Container from "../ui/container";
-import FormClub from "@/components/forms/FormClub";
 import ItemCard from "./ItemCard";
 import SkeletonCard from "@/components/pure/SkeletonCard";
 import { Button } from "@/components/ui/button";
-import { toast } from "react-hot-toast";
 import {
   Dialog,
   DialogContent,
@@ -13,10 +11,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import FormikValues from "@/constants/FormikValues";
 import Form from "../forms/Form";
 
-const CardList = ({images,dataFromHook,data,titleDelete, titleAdd , descAdd, descDelete,titleEdit,descEdit,dataFormValues, onSubmit, buscarPorId, item_info, inputs}) =>{
+const CardList = ({images,withLink,dataFromHook,data,titleDelete, titleAdd , descAdd, descDelete,titleEdit,descEdit,dataFormValues, onSubmit, buscarPorId, item_info, inputs}) =>{
 
 
 
@@ -65,7 +62,7 @@ const CardList = ({images,dataFromHook,data,titleDelete, titleAdd , descAdd, des
                       titleEdit={titleEdit}
                       descEdit={descEdit}
                       titleDelete={titleDelete}
-                      desc={item.nombre}
+                      desc={item.pais}
                       onSubmit={onSubmit}
                       buscarPorId={buscarPorId}
                       values={dataFormValues}
@@ -73,6 +70,7 @@ const CardList = ({images,dataFromHook,data,titleDelete, titleAdd , descAdd, des
                       item_info={item_info}
                       images={images}
                       inputs={inputs}
+                      withLink={withLink}
                     /> 
                 )
               })

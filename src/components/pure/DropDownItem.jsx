@@ -28,18 +28,16 @@ import {
 } from "@/components/ui/dialog"
 import Form from "../forms/Form"
 import {EllipsisVertical} from "lucide-react"
-import { Inputs } from "@/constants/Inputs"
-import { toast } from "react-hot-toast";
 
-const DropDownItem = ({images,titleEdit, descEdit,titleDelete,descDelete,itemId,dataFromHook, values, onSubmit, buscarPorId, inputs}) =>{
+const DropDownItem = ({images,titleEdit, descEdit,titleDelete,descDelete,itemId,dataFromHook, values, onSubmit, buscarPorId, inputs,iconColor}) =>{
 
 
 
   return(
     <DropdownMenu >
       <DropdownMenuTrigger className="w-8 h-8">
-        <div className="relative top-0 flex items-center cursor-pointer right-0 hover:bg-zinc-50 rounded-md h-8 p-2">
-          <EllipsisVertical size={15}/>
+        <div className="relative top-0 flex items-center cursor-pointer right-0 hover:bg-[rgba(0,0,0,0.2)] rounded-md h-8 p-2">
+          <EllipsisVertical color={iconColor} size={15}/>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className=" md:mr-[55px]  mr-[35px]">

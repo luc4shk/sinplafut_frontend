@@ -130,7 +130,7 @@ const Metodos = () =>{
           descDelete={"Se eleminará el método "}
           inputs={METODO_INPUTS_EDIT}
           images={""}
-
+          iconColor={"black"}
           />
           
         )

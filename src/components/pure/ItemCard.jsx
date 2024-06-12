@@ -6,7 +6,6 @@ import {
   CardContent,
   CardDescription
 } from "../ui/card"
-import { Home , Signpost, MapPin} from "lucide-react"
 import { 
   Avatar, 
   AvatarImage, 
@@ -15,31 +14,35 @@ import {
 import { NavLink } from "react-router-dom"
 import { Separator } from "../ui/separator"
 import DropDownItem from "./DropDownItem"
-
-import { TEAM_INFO} from "@/constants/InfoCards";
 import ClubInfoItem from "./ClubInfoItem"
-const ItemCard = ({images,item_data,values,dataFromHook,titleDelete,titleEdit, descEdit,imagen, title, desc, itemId, onSubmit, buscarPorId, descDelete, item_info, inputs}) =>{
-
-
+import Palette from 'react-palette';
+const ItemCard = ({images,item_data,values,dataFromHook,titleDelete,titleEdit, descEdit,imagen, title, desc, itemId, onSubmit, buscarPorId, descDelete, item_info, inputs,withLink=false}) =>{
 
   return(
-    <Card>
-      <CardHeader className="w-full bg-zinc-100 flex flex-row justify-between gap-4">
+    <Card className={"overflow-hidden"}>
+      <Palette src={imagen}>
+          {({ data }) => (
+            <CardHeader className={`w-full  flex flex-row justify-between gap-4 z-index-0`} style={{ backgroundColor: data.darkMuted}}>
         <div className="flex-row gap-4 flex items-center">
-          <Avatar className="p-2 w-16 h-16 border ">
+          <Avatar className="flex items-center p-2 w-16 h-16 border border-white">
             <AvatarImage src={imagen} />
             <AvatarFallback>L</AvatarFallback>
           </Avatar>
           <div>
-            <CardTitle>
-              <NavLink to={"/hola"}> 
-                {title}
-              </NavLink>
+            <CardTitle className="text-white">
+              {
+                withLink ?
+                  <NavLink to={`/adminPanel/clubes/${item_data.id}`}> 
+                    {title}
+                  </NavLink>
+                  :
+                  title
+              }
             </CardTitle>
-            <CardDescription>{desc}</CardDescription>
+            <CardDescription className="text-white">{desc}</CardDescription>
           </div>
         </div>
-         <DropDownItem 
+        <DropDownItem 
           itemId={itemId} 
           onSubmit={onSubmit}
           buscarPorId={buscarPorId}
@@ -52,13 +55,16 @@ const ItemCard = ({images,item_data,values,dataFromHook,titleDelete,titleEdit, d
           descDelete={descDelete}
           inputs={inputs}
           images={images}
+          iconColor={"white"}
         />
-             </CardHeader>
+      </CardHeader>
+             )}
+</Palette>
       <Separator/>
       <CardContent className="flex flex-col mt-6 gap-4">
         {
           item_info.map((item, index) => (
-          <ClubInfoItem key={index} icon={item.icon} text={item.text(item_data)}/>
+            <ClubInfoItem key={index} icon={item.icon} text={item.text(item_data)}/>
           ))
         }
       </CardContent>

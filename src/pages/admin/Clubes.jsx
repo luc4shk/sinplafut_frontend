@@ -1,22 +1,7 @@
 import React, {useState} from "react";
-import { Button } from "@/components/ui/button";
-import Container from "@/components/ui/container";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-
 import { useClubs } from "@/hooks/useClubs";
-import FormClub from "@/components/forms/FormClub";
 import FormikValues from "@/constants/FormikValues";
 import { toast } from "react-hot-toast";
-import ClubCard from "@/components/pure/ClubCard";
-import SkeletonCard from "@/components/pure/SkeletonCard";
 import CardList from "@/components/pure/CardList";
 import { CLUB_INFO } from "@/constants/InfoCards";
 import { Inputs } from "@/constants/Inputs";
@@ -98,6 +83,7 @@ const Clubes = () =>{
         item_info={CLUB_INFO}
         images={images}
         inputs={CLUB_INPUTS}
+        withLink
       />
     </>
   )

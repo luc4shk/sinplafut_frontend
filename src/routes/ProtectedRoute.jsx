@@ -6,7 +6,7 @@ const ProtectedRoute = () =>{
   const {isLogin} = useContext(UserContext)
 
 
-
+  //Se verifica si el usuario esta logueado
   if(!isLogin){
     return <Navigate to={"/"}/>
   }
