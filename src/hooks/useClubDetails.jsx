@@ -1,22 +1,23 @@
-import React from "react";
-import CardList from "@/components/pure/CardList";
-import Container from "@/components/ui/container";
+import { useEffect } from "react";
+import { useClubs }from "@/hooks/useClubs";
 import useTeams from "@/hooks/useTeams";
+import { useParams } from "react-router-dom";
 import FormikValues from "@/constants/FormikValues";
-import { toast } from "react-hot-toast";
-import { TEAM_INFO } from "@/constants/InfoCards";
 import { Inputs } from "@/constants/Inputs";
+import { toast } from "react-hot-toast";
 
-const Teams = () =>{
+const useClubDetails = () => {
+  const { id } = useParams();
+  const club = useClubs();
+  const team = useTeams();
+  const { TEAM } = FormikValues();
+  const { TEAM_INPUTS } = Inputs();
 
-  const team = useTeams()
-  const {TEAM} = FormikValues()
-  const {TEAM_INPUTS} = Inputs()
+  useEffect(() => {
+    club.fetchClubById(id);
+    club.fetchTeamsById(id);
+  }, [team.teams]);
 
-  const images = {
-    form:"escudo",
-    data:"escudo"
-  }
 
   const onSubmit = {
     add: ({nombre,telefono,categoria,club,escudo}) =>{
@@ -59,28 +60,30 @@ const Teams = () =>{
     }
   }
 
-  const titleEdit = "Editar Equipo"
-  const descEdit = "Rellena los campos para editar tu equipo"
-  const titleDelete = "Eliminar Equipo"
-  const descDelete = "Esta acción eliminará al equipo "
 
-  return(
-    <CardList 
-      dataFromHook={team}
-      data={team.teams}
-      titleAdd={"Añadir Equipo"}
-      descAdd={"Completa los siguientes campos para poder agregar un equipo"}
-      dataFormValues={TEAM}
-      onSubmit={onSubmit}
-      buscarPorId={team.fetchTeamById}
-      titleEdit={titleEdit}
-      descEdit={descEdit}
-      titleDelete={titleDelete}
-      descDelete={descDelete}
-      images={images}
-      item_info={TEAM_INFO}
-      inputs={TEAM_INPUTS}
-    />
-  )
-}
-export default Teams
+  const formTexts = {
+    titleAdd: "Añadir Equipo",
+    descAdd: "Completa los siguientes campos para poder agregar un equipo",
+    titleEdit: "Editar Equipo",
+    descEdit: "Rellena los campos para editar tu equipo",
+    titleDelete: "Eliminar Equipo",
+    descDelete: "Esta acción eliminará al equipo "
+  };
+
+  const images = {
+    form: "escudo",
+    data: "escudo"
+  };
+
+  return { 
+    club, 
+    team, 
+    onSubmit, 
+    formTexts, 
+    images, 
+    TEAM, 
+    TEAM_INPUTS };
+};
+
+export default useClubDetails;
+

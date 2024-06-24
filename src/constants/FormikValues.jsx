@@ -264,7 +264,7 @@ const FormikValues = () =>{
         .required('El tipo es obligatorio'),
         equipoId: Yup.string()
         .required('El equipo es obligatorio'),
-        metodos: Yup.array().typeError('Selecciona al menos un método')
+        metodos: Yup.array().typeError('Selecciona al menos un método').of(Yup.string()).min(1,"Selecciona al menos un método")
 
       })
     },

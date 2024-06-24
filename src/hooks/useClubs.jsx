@@ -68,7 +68,6 @@ export const useClubs = () => {
     try {
       const response = await getClubById(id);
       setValues(response.data.data);
-      console.log(response.data.data)
       setIsLoadingDetails(true)
     } catch (error) {
       throw error.response.data.message
@@ -82,7 +81,6 @@ export const useClubs = () => {
     try {
       const response = await getTeamsById(id);
       setClubTeams(response.data.data);
-      console.log(response.data.data)
       setIsLoadingDetails(true)
     } catch (error) {
       console.log(error)

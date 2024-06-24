@@ -17,7 +17,6 @@ const Form = ({inputs,onSubmit,initialValues,imgNombre,validationSchema, isEdit=
   })
 
   const {prev} = imgNombre ?  usePrevImage(watch, isEdit,imgNombre) : {}
-  console.log(errors)
 
   return(
     <>
@@ -53,9 +52,44 @@ const Form = ({inputs,onSubmit,initialValues,imgNombre,validationSchema, isEdit=
                       {errors[item.name]?.message} 
                     </ErrorMessage>
                   </div>
-                  : item.isCheckbox ? 
-                    item.element
-                  : 
+                  :
+                item.isCheckbox ? 
+                (
+                  (
+                    <>
+                      <p className={item.estilosTitle}>{item.title}</p>
+                      <div className={item.estilos ? item.estilos : ""} key={i}>
+                        {item.element.map((checkbox, index) => (
+                          <div key={index} className={checkbox.estilosPair}>
+                            <input
+                              type="checkbox"
+                              className="w-4"
+                              id={checkbox.name}
+                              name={checkbox.name}
+                              value={
+                                `{
+                               "id":${checkbox.idCheckbox},
+                               "nombre":"${checkbox.nameCheckbox}",
+                               "descripcion":"${checkbox.descripcionCheckbox}",
+                               "carga":"${checkbox.cargaCheckbox}",
+                               "intensidad":"${checkbox.intensidadCheckbox}",
+                               "duracion":${checkbox.duracionCheckbox}
+                             }`
+                              }
+                              {...register(checkbox.name)}
+                            />
+                            <label htmlFor={checkbox.name} className={checkbox.estilos}>{checkbox.nameCheckbox}</label>
+
+                          </div>
+                        ))}
+                        <ErrorMessage validate={errors[item.name]}>
+                          {errors[item.name]?.message}
+                        </ErrorMessage>
+                      </div>
+                    </>
+                  )
+                )
+                :
                   <div
                     key={i}
                     className={item.estilos ? item.estilos : item.type==="file" ? "col-span-2":""}

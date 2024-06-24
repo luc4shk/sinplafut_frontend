@@ -63,7 +63,6 @@ const useTeams = () =>{
     try {
       const response = await getTeamById(id);
       setValues(response.data.data);
-      console.log(response.data.data)
       setIsLoadingDetails(true)
     } catch (error) {
       console.error(`Error fetching team with id ${id}:`, error);

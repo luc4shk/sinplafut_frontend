@@ -60,10 +60,15 @@ const Clubes = () =>{
 
   }
 
-  const titleEdit = "Editar Equipo"
-  const descEdit = "Rellena los campos para editar tu equipo"
-  const titleDelete = "Eliminar Equipo"
-  const descDelete = "Esta acción eliminar al equipo "
+  const formTexts = {
+    titleAdd: "Añadir Club",
+    descAdd: "Completa los siguientes campos para poder agregar un club",
+    titleEdit: "Editar Club",
+    descEdit: "Rellena los campos para editar tu club",
+    titleDelete: "Eliminar Club",
+    descDelete: "Esta acción eliminará al club "
+  };
+
 
 
   return(
@@ -71,19 +76,15 @@ const Clubes = () =>{
       <CardList
         dataFromHook={club}
         data={club.clubes}
-        titleAdd={"Añadir Club"}
-        descAdd={"Completa los siguientes campos para poder agregar un club"}
-        dataFormValues={CLUB}
+        formValidation={CLUB}
+        formTexts={formTexts}
         onSubmit={onSubmit}
         buscarPorId={club.fetchClubById}
-        titleEdit={titleEdit}
-        descEdit={descEdit}
-        titleDelete={titleDelete}
-        descDelete={descDelete}
         item_info={CLUB_INFO}
         images={images}
         inputs={CLUB_INPUTS}
         withLink
+        link={"/adminPanel/clubes/"}
       />
     </>
   )

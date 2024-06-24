@@ -25,7 +25,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import FormikValues from "@/constants/FormikValues";
-import FormSesion from "@/components/forms/FormSesion";
+import Form from "@/components/forms/Form";
 import { toast } from "react-hot-toast";
 import useTeams from "@/hooks/useTeams";
 import {Trash2} from "lucide-react"
@@ -163,7 +163,8 @@ const Session = () =>{
     }
   ]
   return(
-    <Container>
+    //<Container>
+      <>
       <Dialog open={sesion.openAdd} onOpenChange={sesion.setOpenAdd}>
         <DialogTrigger asChild>
           <Button onClick={()=>sesion.setOpenAdd(true)}  variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">Añadir Sesión</Button>
@@ -175,7 +176,7 @@ const Session = () =>{
               Rellena los campos para agregar tu sesión
             </DialogDescription>
           </DialogHeader>
-          <FormSesion
+          <Form
             onSubmit={onSubmit.add}
             initialValues={SESION?.add.initialValues}
             validationSchema={SESION?.add.validationSchema}
@@ -185,7 +186,8 @@ const Session = () =>{
       </Dialog>
 
       <DataTable columns={columns} data={parseData(sesion.sessions)} placeholderSearch={"Buscar por nombre"} searchName={"nombre"}/>
-    </Container>
+</>
+    //</Container>
   )
 }
 

@@ -1,0 +1,1 @@
+import {jugador} from "./axios";

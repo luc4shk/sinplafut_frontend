@@ -261,8 +261,8 @@ export const Inputs = () =>{
       element: 
         <>
           <option value={""} selected disabled hidden>Seleccion el equipo</option>
-          {teams.map((item)=>(
-        <option value={item.id}>{item.nombre}</option>
+          {teams.map((item,i)=>(
+        <option key={i} value={item.id}>{item.nombre}</option>
       ))}
         </>
     },

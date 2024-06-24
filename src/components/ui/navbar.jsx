@@ -34,20 +34,12 @@ const NavBar = () =>{
       to:"/adminPanel/clubes",
       text:"Clubes"
     },
-    {
-      to:"/adminPanel/equipos",
-      text:"Equipos"
-    },
   ]
 
   const menuItemsSidebar= [
     {
       to:"/adminPanel/clubes",
       text:"Clubes"
-    },
-    {
-      to:"/adminPanel/equipos",
-      text:"Equipos"
     },
     {
       to:"/adminPanel/entrenamientos",
@@ -179,7 +171,7 @@ const NavBar = () =>{
           ))
         }
 
-      {/*DropMenu del Plan*/}
+        {/*DropMenu del Plan*/}
         <NavigationMenu >
           <NavigationMenuList >
             <NavigationMenuItem >
@@ -231,7 +223,7 @@ const NavBar = () =>{
         </NavigationMenu>
 
 
-        
+
 
 
       </div>

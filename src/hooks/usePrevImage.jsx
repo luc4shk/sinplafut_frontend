@@ -10,7 +10,6 @@ export const usePrevImage = (watch,isEdit,name) =>{
   },[file])
 
   const getUrl = (file) =>{
-    console.log(file)
     if(typeof file !== 'string'){
       if(file && file[0]){
         const newUrl = URL.createObjectURL(file[0]);
