@@ -40,7 +40,7 @@ const Index = () =>{
               <form 
                 onSubmit={handleSubmit(({email, password})=>{
                   logIn(email,password)
-                  navigate("/adminPanel")
+                  navigate("/adminPanel/clubes")
                 })}
                 className="flex flex-col p-0 gap-4">
                 <div>

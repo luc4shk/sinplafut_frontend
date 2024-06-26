@@ -18,7 +18,6 @@ const usePlayerLesion = (idPlayer) =>{
       setIsLoading(true)
       const response = await getPlayerLesions(id)
       setPlayerLesions(response.data.data)
-      console.log(response)
     }
     catch(error){
       console.error(`Error fetching player lesions:`, error);

@@ -55,6 +55,15 @@ const lesion = axios.create({
   }
 })
 
+//Creamos la instacia para el cuerpo técnico
+const cuerpoTecnico = axios.create({
+  baseURL: "http://localhost:8080/cuerpo-tecnico-service/staff",
+  timeout: 20000,
+  headers: {
+    "Content-Type": "application/json",
+  }
+})
+
 
 //Exportamos las instancias para que sean accesbiles
 export {
@@ -63,5 +72,6 @@ export {
   metodo,
   sesion,
   jugador,
-  lesion
+  lesion,
+  cuerpoTecnico
 }

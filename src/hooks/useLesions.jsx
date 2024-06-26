@@ -29,7 +29,6 @@ const useLesions = () =>{
     setIsLoadingDetails(true);
     try {
       const response = await getLesionById(id);
-      console.log("lesion", id, response.data.data)
       setValues(response.data.data);
 
       setIsLoadingDetails(true)

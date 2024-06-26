@@ -41,7 +41,6 @@ const useClubDetails = () => {
     },
     edit:({iditem,nombre, telefono, categoria, club, escudo})=>{
       const file = escudo[0]
-      console.log(iditem,nombre,telefono,categoria,id,file)
       setIsLoading(true)
       toast.promise(
         team.fetchUpdateTeam(iditem,nombre,telefono, categoria, id,file),

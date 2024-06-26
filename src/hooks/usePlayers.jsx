@@ -5,6 +5,9 @@ const usePlayers= () =>{
 
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [openAdd,setOpenAdd]= useState(false)
+  const [openEdit,setOpenEdit]= useState(false)
+  const [openLink,setOpenLink]= useState(false)
+  const [openUnlink,setOpenUnlink]= useState(false)
   const [activos,setActivos]= useState(false)
   const [lesionados,setLesionados]= useState(false)
   const [values, setValues] = useState({});
@@ -33,7 +36,6 @@ const usePlayers= () =>{
     setIsLoadingDetails(true);
     try{
       const response = await getPlayerById(id)
-      console.log(response)
       setValues(response.data.data);
       setIsLoadingDetails(true)
     }
@@ -89,11 +91,17 @@ const usePlayers= () =>{
     isLoadingDetails,
     setOpenAdd,
     openAdd,
+    openEdit,
+    setOpenEdit,
     activos,
     setActivos,
     lesionados,
     setLesionados,
-    values
+    values,
+    openLink,
+    setOpenLink,
+    openUnlink,
+    setOpenUnlink
   }
 }
 

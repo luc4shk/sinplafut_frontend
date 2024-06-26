@@ -59,13 +59,14 @@ const Jugador = ({teamId}) =>{
     //Método para agregar un jugador
     add: ({nombre, apellido, fecha_nacimiento, documento, email, direccion, celular, numero_camiseta, tipo_sangre, nivel_hemoglobina, consumo_o2, lactato_sangre, equipoId}) =>{
       const new_fecha_nacimiento = parseDate(fecha_nacimiento)
+      console.log(nombre, apellido, new_fecha_nacimiento, documento, email, direccion, celular, numero_camiseta, tipo_sangre, nivel_hemoglobina, consumo_o2, lactato_sangre, equipoId)
       toast.promise(
         player.fetchAddPlayer(nombre, apellido, new_fecha_nacimiento, documento, email, direccion, celular, numero_camiseta, tipo_sangre, nivel_hemoglobina, consumo_o2, lactato_sangre, equipoId),
         {
           loading: 'Añadiendo Jugador',
           success: ()=>{
-            team.fetchPlayersByTeam(teamId);
             player.setOpenAdd(false)
+            team.fetchPlayersByTeam(teamId);
             return'Jugador añadido con éxito 👌'},
           error:(error)=> error+"",
         }
@@ -80,7 +81,7 @@ const Jugador = ({teamId}) =>{
           loading: 'Editando Jugador',
           success: ()=>{
             team.fetchPlayersByTeam(teamId);
-            player.setOpenAdd(false)
+            player.setOpenEdit(false)
             return'Jugador editado con éxito 👌'},
           error:(error)=> error+"",
         }
@@ -94,7 +95,7 @@ const Jugador = ({teamId}) =>{
           loading: 'Desvinculando Jugador',
           success: ()=>{
             team.fetchPlayersByTeam(teamId);
-            player.setOpenAdd(false)
+            player.setOpenUnlink(false)
             return'Jugador desvinculado con éxito 👌'},
           error:(error)=> error+"",
         }
@@ -109,7 +110,7 @@ const Jugador = ({teamId}) =>{
           loading: 'Vinculando Jugador',
           success: ()=>{
             team.fetchPlayersByTeam(teamId);
-            player.setOpenAdd(false)
+            player.setOpenLink(false)
             return'Jugador vinculado con éxito 👌'},
           error:(error)=> error+"",
         }
@@ -186,7 +187,6 @@ const Jugador = ({teamId}) =>{
       enableHiding: false,
       cell: ({row}) => {
         const player = usePlayers()
-        console.log(row.original.id)
         const deleteMessage = `${player.values.nombre} ${player.values.apellido} - ${player.values.documento}`;
         return (
           <DropDownItem
@@ -199,7 +199,7 @@ const Jugador = ({teamId}) =>{
             titleEdit={"Editar Jugador"}
             descEdit={"Edita los campos para modificar tu jugador."}
             titleDelete={"¿Estás seguro?"}
-            descDelete={"Se eleminará el Jugador "}
+            descDelete={"Se eliminará el Jugador "}
             inputs={PLAYER_INPUTS_EDIT}
             images={""}
             iconColor={"black"}
@@ -227,7 +227,7 @@ const Jugador = ({teamId}) =>{
                 <AlertDialogHeader>
                   <AlertDialogTitle>¿Desvincular Jugador?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    ¿Estas seguro que desas desvincular al jugador <b>{player.values.nombre} {player.values.apellido}</b> con documento <b>{player.values.documento}</b>?
+                    ¿Estas seguro que deseas desvincular al jugador <b>{player.values.nombre} {player.values.apellido}</b> con documento <b>{player.values.documento}</b>?
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -259,12 +259,12 @@ const Jugador = ({teamId}) =>{
             <div className="flex justify-between items-center">
               <div className="flex-col sm:flex-row flex gap-2">
                 <Dialog 
-                  open={team.openAdd} 
-                  onOpenChange={team.setOpenAdd}
+                  open={player.openAdd} 
+                  onOpenChange={player.setOpenAdd}
                 >
                   <DialogTrigger asChild>
                     <Button 
-                      onClick={()=>team.setOpenAdd(true)}  
+                      onClick={()=>player.setOpenAdd(true)}  
                       variant="outline"
                       className="hover:bg-zinc-100 ">Añadir Jugador</Button>
                   </DialogTrigger>
@@ -284,12 +284,12 @@ const Jugador = ({teamId}) =>{
                   </DialogContent>
                 </Dialog>
                 <Dialog 
-                  open={player.openAdd} 
-                  onOpenChange={player.setOpenAdd}
+                  open={player.openLink} 
+                  onOpenChange={player.setOpenLink}
                 >
                   <DialogTrigger asChild>
                     <Button 
-                      onClick={()=>player.setOpenAdd(true)}  
+                      onClick={()=>player.setOpenLink(true)}  
                       variant="outline"
                       className="hover:bg-zinc-100 ">Vincular Jugador</Button>
                   </DialogTrigger>

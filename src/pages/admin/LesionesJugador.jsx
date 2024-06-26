@@ -15,13 +15,11 @@ import { toast } from "react-hot-toast";
 
 const LesionesJugador = () =>{
   const {id} = useParams()
-  console.log(id)
   const player = usePlayers()
   const playerLesions = usePlayerLesion(id)
   const {PLAYER_LESION_INPUTS} = Inputs()
   const {PLAYER_LESION} = FormikValues()
 
-  console.log(playerLesions.playerLesions)
 
 
   const diasLesionado = (fecha_inicio,fecha_fin) =>{
@@ -50,7 +48,6 @@ const LesionesJugador = () =>{
     add: ({lesionId, fecha_inicio,fecha_fin}) =>{
       const new_fecha_inicio = parseDate(fecha_inicio)
       const new_fecha_fin = parseDate(fecha_fin)
-      console.log(lesionId, new_fecha_inicio, new_fecha_fin)
       toast.promise(
         playerLesions.fetchLinkPlayerLesion(lesionId, new_fecha_inicio, new_fecha_fin),
         {
@@ -67,7 +64,6 @@ const LesionesJugador = () =>{
       const new_fecha_inicio = parseDate(fecha_inicio)
       const new_fecha_fin = parseDate(fecha_fin)
 
-      console.log(id,int_lesionId,new_fecha_inicio,new_fecha_fin)
       toast.promise(
         playerLesions.fetchUpdatePlayerLesion(id,int_lesionId,new_fecha_inicio,new_fecha_fin),
         {

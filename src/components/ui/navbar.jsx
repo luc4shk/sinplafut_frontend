@@ -49,78 +49,9 @@ const NavBar = () =>{
       to:"/adminPanel/lesiones",
       text:"Lesiones"
     },
-    {
-      to:"/adminPanel/entrenamientos",
-      text:"Entrenamientos"
-    },
-
-    {
-      to:"/adminPanel/macrociclos",
-      text:"Macrociclos"
-    },
-    {
-      to:"/adminPanel/microciclos",
-      text:"Microciclos"
-    },
-    {
-      to:"/adminPanel/metodos",
-      text:"Metodos"
-    },
-    {
-      to:"/adminPanel/sesiones",
-      text:"Sesiones"
-    },
-    {
-      to:"/adminPanel/jugadores",
-      text:"Jugadores"
-
-    },
-    {
-      to:"/adminPanel/cuerpoTecnico",
-      text:"Cuerpo Técnico"
-
-    }
-
   ]
 
-  //Links en el dropMenu
-  const dropDownItems = [
-    {
-      to:"/adminPanel",
-      text:"Jugadores"
-    },
-    {
-      to:"/adminPanel",
-      text:"Cuerpo Técnico"
-    }
-
-  ]
-
-  const dropDownItemsPlan= [
-    {
-      to:"/adminPanel/entrenamientos",
-      text:"Entrenamientos"
-    },
-
-    {
-      to:"/adminPanel/macrociclos",
-      text:"Macrociclos"
-    },
-    {
-      to:"/adminPanel/microciclos",
-      text:"Microciclos"
-    },
-    {
-      to:"/adminPanel/metodos",
-      text:"Metodos"
-    },
-    {
-      to:"/adminPanel/sesiones",
-      text:"Sesiones"
-    }
-
-  ]
-
+ 
   return(
     <div className=" font-karla w-full text-center h-12 bg-white text-black flex justify-between items-center border-b px-4 border-zinc-200 text-lg">
 
@@ -178,61 +109,6 @@ const NavBar = () =>{
             </div> 
           ))
         }
-
-        {/*DropMenu del Plan*/}
-        <NavigationMenu >
-          <NavigationMenuList >
-            <NavigationMenuItem >
-              <NavigationMenuTrigger className={"text-lg font-normal p-2 "}>Plan</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="flex flex-col items-left p-2 ">
-                  {dropDownItemsPlan.map((item, i)=>(
-                    <NavLink 
-                      key={i}
-                      to={item.to} 
-                      className={({isActive})=>
-                          `hover:bg-zinc-100 hover:text-black hover:text-black  text-gray-400 rounded-md p-2 radius-md ${isActive ? "text-black" : ""}`
-                      }>
-                      <NavigationMenuLink className={""}>
-                        {item.text}
-                      </NavigationMenuLink>
-                    </NavLink>
-                  ))} 
-                </div>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-
-
-        {/*DropMenu del Personal*/}
-        <NavigationMenu >
-          <NavigationMenuList >
-            <NavigationMenuItem >
-              <NavigationMenuTrigger className={"text-lg font-normal p-2 "}>Personal</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="flex flex-col items-left p-2 ">
-                  {dropDownItems.map((item, i)=>(
-                    <NavLink 
-                      key={i}
-                      to={item.to} 
-                      className={({isActive})=>
-                          `hover:bg-zinc-100 hover:text-black hover:text-black  text-gray-400 rounded-md p-2 radius-md ${isActive ? "text-black" : ""}`
-                      }>
-                      <NavigationMenuLink className={""}>
-                        {item.text}
-                      </NavigationMenuLink>
-                    </NavLink>
-                  ))} 
-                </div>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-
-
-
-
 
       </div>
 

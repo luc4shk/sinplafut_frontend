@@ -74,7 +74,6 @@ const useTeams = () =>{
     try {
       setIsLoading(true)
       const response = await getPlayersByState(id,estado);
-      console.log(response)
       setTeamPlayers(response.data.data);
     } catch (error) {
       console.error("Error fetching players by state:", error);

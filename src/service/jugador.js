@@ -46,7 +46,6 @@ const editPlayer = async (playerId, nombre, apellido, fecha_nacimiento, document
       lactato_sangre: lactato_sangre,
       equipoId: equipoId
     }
-    console.log(body)
     const response = jugador.put(`/update/${playerId}`, body)
     return response
   }

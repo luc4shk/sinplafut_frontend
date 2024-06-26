@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useParams } from "react-router-dom"
 import Jugador from "./Jugador"
 import SkeletonInfoHeader from "@/components/pure/SkeletonInfoHeader"
+import Staff from "./Staff"
 
 const EquipoDetalles = () =>{
   const {id} = useParams()
@@ -42,7 +43,10 @@ const EquipoDetalles = () =>{
           <TabsContent value="jugadores">
             <Jugador teamId={id}/>
           </TabsContent>
-          <TabsContent value="cuerpo_tecnico">Cuerpo Técnico</TabsContent>
+          <TabsContent value="cuerpo_tecnico">
+            <Staff teamId={id}/>
+
+          </TabsContent>
           <TabsContent value="macrociclos">Macrociclos</TabsContent>
         </Tabs>
       </Container>

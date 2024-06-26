@@ -166,8 +166,8 @@ export function DataTable({ columns, data , placeholderSearch, searchName}) {
             <SelectValue placeholder={table.pageSize} />
           </SelectTrigger>
             <SelectContent>
-              {[5, 10, 20, 30, 40].map(pageSize => (
-                <SelectItem  value={pageSize}>
+              {[5, 10, 20, 30, 40].map((pageSize,i)=> (
+                <SelectItem  key={i} value={pageSize}>
                   {pageSize}
                 </SelectItem>
               ))}

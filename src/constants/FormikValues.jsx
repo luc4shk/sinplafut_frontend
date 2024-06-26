@@ -173,147 +173,6 @@ const FormikValues = () =>{
     }
   }
 
-  const METODO = {
-    add:{
-      initialValues: {
-        nombre: "",
-        descripcion: "",
-        duracion:"",
-        tipoCarga:"",
-        tipoIntensidad:"",
-      },
-      validationSchema:Yup.object({
-        nombre: Yup.string()
-        .required('El nombre es obligatorio.')
-        .max(30, 'El nombre no debe contener mas de 30 caracteres.')
-        .min(3, 'El nombre debe contener mínimo 3 caracteres.'),
-        descripcion: Yup.string()
-        .required('La descripcion es obligatoria.')
-        .max(30, 'La descripción no debe contener mas de 230 caracteres.')
-        .min(10, 'La descripción debe contener mínimo 10 caracteres.'),
-        duracion: Yup.string()
-        .required('El la duración es obligatoria')
-        .matches(/^[0-9]+$/, 'El teléfono solo puede contener números.'),
-        //.min(7, 'El teléfono debe contener 7 caracteres')
-        //.max(7, 'El teléfono debe contener 7 caracteres'),
-        tipoCarga: Yup.string().required("Selecciona una carga."),
-        tipoIntensidad: Yup.string().required("Selecciona una intensidad."),
-      })
-
-    },
-    edit:{
-      initialValues: (values)=>({
-        nombre: values?.nombre ?? null,
-        descripcion: values?.descripcion ?? null,
-        duracion: values?.duracion?? null,
-        tipoCarga: values?.carga?? null,
-        tipoIntensidad: values?.intensidad ?? null,
-        id: values?.id?? null
-      }),
-      validationSchema:Yup.object({
-        nombre: Yup.string()
-        .required('El nombre es obligatorio.')
-        .max(30, 'El nombre no debe contener mas de 30 caracteres.')
-        .min(3, 'El nombre debe contener mínimo 3 caracteres.'),
-        descripcion: Yup.string()
-        .required('La descripcion es obligatoria.')
-        .max(30, 'La descripción no debe contener mas de 30 caracteres.')
-        .min(10, 'La descripción debe contener mínimo 10 caracteres.'),
-        duracion: Yup.string()
-        .required('El la duración es obligatoria')
-        .matches(/^[0-9]+$/, 'El teléfono solo puede contener números'),
-        //.min(7, 'El teléfono debe contener 7 caracteres')
-        //.max(7, 'El teléfono debe contener 7 caracteres'),
-        tipoCarga: Yup.string().required("Selecciona una categoría"),
-        tipoIntensidad: Yup.string().required("Selecciona una intensidad"),
-      })
-
-    }
-  }
-
-  const SESION = {
-    add: {
-      initialValues: {
-        nombre: "",
-        descripcion: "",
-        fecha_inicio: "",
-        hora: "",
-        duracion: "",
-        tipo: "",
-        equipoId: "",
-        metodos: ""
-      },
-      validationSchema: Yup.object().shape({
-        nombre: Yup.string()
-        .required('El nombre es obligatorio.')
-        .max(30, 'El nombre no debe contener mas de 30 caracteres.')
-        .min(3, 'El nombre debe contener mínimo 3 caracteres.'),
-        descripcion: Yup.string()
-        .required('La descripción es obligatoria.')
-        .max(30, 'La descripción no puede contener más de 30 caracteres.')
-        .min(10, 'La descripción debe contener mínimo 10 caracteres.'),
-        fecha_inicio: Yup.string()
-        .required('La fecha es obligatoria'),
-        hora: Yup.string()
-        .required('La hora es obligatoria'),
-        duracion: Yup.string()
-        .required('La duración es obligatoria'),
-        //.max(25, 'La duración no puede contener más de 25 caracteres.')
-        //.min(3, 'La duración debe contener mínimo 3 caracteres.'),
-        tipo: Yup.string()
-        .required('El tipo es obligatorio'),
-        equipoId: Yup.string()
-        .required('El equipo es obligatorio'),
-        metodos: Yup.array().typeError('Selecciona al menos un método').of(Yup.string()).min(1,"Selecciona al menos un método")
-
-      })
-    },
-    edit: {
-      initialValues: (values)=>({
-        nombre: values?.nombre ?? null,
-        descripcion: values?.descripcion ?? null,
-        fecha_inicio: values?.fecha_inicio ?? null,
-        hora: values?.hora ?? null,
-        duracion: values?.duracion ?? null,
-        tipo: values?.tipo ?? null,
-        equipoId: values?.equipoId ?? null,
-        metodos: values?.metodos ?? null,
-        iditem: values?.id?? null
-      }),
-      validationSchema: 
-      Yup.object().shape({
-        nombre: Yup.string()
-        .required('El nombre es obligatorio.')
-        .max(30, 'El nombre no debe contener mas de 30 caracteres.')
-        .min(3, 'El nombre debe contener mínimo 3 caracteres.'),
-        direccion: Yup.string()
-        .required('La dirección es obligatoria.')
-        .max(25, 'La dirección no puede contener más de 25 caracteres.')
-        .min(3, 'La dirección debe contener mínimo 3 caracteres.'),
-        telefono: Yup.string()
-        .required('El teléfono es obligatorio')
-        .matches(/^[0-9]+$/, 'El teléfono solo puede contener números')
-        .min(7, 'El teléfono debe contener 7 caracteres')
-        .max(7, 'El teléfono debe contener 7 caracteres'),
-        ciudad: Yup.string()
-        .required('La ciudad es obligatoria')
-        .max(25, 'La ciudad no puede contener más de 25 caracteres.')
-        .min(3, 'La ciudad debe contener mínimo 3 caracteres.'),
-        pais: Yup.string()
-        .required('El país es obligatorio')
-        .max(25, 'El país no puede contener más de 25 caracteres.')
-        .min(3, 'El país debe contener mínimo 3 caracteres.'),
-        estadio: Yup.string()
-        .required('El estadio es obligatorio')
-        .max(25, 'El estadio no puede contener más de 25 caracteres.')
-        .min(3, 'El estadio debe contener mínimo 3 caracteres.'),
-
-
-      })
-
-    }
-  }
-
   const PLAYER = {
     add:{
       initialValues: (id)=>
@@ -364,15 +223,22 @@ const FormikValues = () =>{
         .matches(/^[0-9]{1,2}$/, 'La camiseta debe tener un número entre 0 y 99'),
         tipo_sangre: Yup.string()
         .required('El tipo de sangre es obligatorio.'),
-        nivel_hemoglobina: Yup.string()
+nivel_hemoglobina: Yup.number()
         .required('El nivel de hemoglobina es obligatorio.')
-        .matches(/^(1[5-8])$/, 'El nivel de hemoglobina debe ser un número del 15 al 18'),
-        consumo_o2: Yup.string()
+        .max(18,'El nivel de hemoglobina debe ser un número del 15 al 18')
+        .min(15,'El nivel de hemoglobina debe ser un número del 15 al 18')
+        .typeError('El nivel del consumo de hemoglobina es obligatorio.'),
+        consumo_o2: Yup.number()
         .required('El consumo de oxígeno es obligatorio.')
-        .matches(/^(4[0-9]|[5-8][0-9]|90)$/, 'El consumo de oxígeno debe ser un número entre 40 y 90 '),
-        lactato_sangre: Yup.string()
+        .max(90,'El consumo de oxígeno debe ser un número entre 40 y 90')
+        .min(40,'El consumo de oxígeno debe ser un número entre 40 y 90')
+        .typeError('El nivel del consumo de oxígeno es obligatorio.'),
+        lactato_sangre: Yup.number()
         .required('El nivel de lactato en sangre es obligatorio.')
-        .matches(/^[2-5]$/, 'El lactato de sangre debe ser un número entre 2 y 5'),
+        .max(5,'El lactato de sangre debe ser un número entre 2 y 5')
+        .min(2,'El lactato de sangre debe ser un número entre 2 y 5')
+        .typeError('El nivel de lactato en sangre es obligatorio.'),
+
         equipoId: Yup.number()
         .required('El equipo ID es obligatorio.')
       })
@@ -546,22 +412,109 @@ const FormikValues = () =>{
         lesionId: Yup.string().required("La lesión es requerida")
       })
 
-    
+
+    }
   }
-}
+
+  const STAFF = {
+    add:{
+      initialValues:(id)=>({
+        nombre: "",
+        apellido: "",
+        email: "",
+        documento: "",
+        fecha_nacimiento: "",
+        telefono: "",
+        equipoId: id,
+        tipo: ""
+      }),
+      validationSchema:Yup.object().shape({
+        nombre: Yup.string()
+        .required('El nombre es obligatorio.')
+        .max(40, 'El nombre no debe contener mas de 40 caracteres.')
+        .min(2, 'El nombre debe contener mínimo 2 caracteres.'),
+        apellido: Yup.string()
+        .required('El apellido es obligatorio.')
+        .max(45, 'El apellido no puede contener más de 45 caracteres.')
+        .min(2, 'El apellido debe contener mínimo 2 caracteres.'),
+        email: Yup.string()
+        .email('Formato de email inválido.')
+        .required('El email es obligatorio.'),
+
+        documento: Yup.string()
+        .required('El documento es obligatorio.')
+        .matches(/^\d{10}$/, 'El documento debe tener 10 números.'),
+        fecha_nacimiento: Yup.string()
+        .required('La fecha de nacimiento es obligatoria.'),
+        fecha_nacimiento: Yup.string()
+        .required('La fecha de nacimiento es obligatoria.'),
+        telefono: Yup.string()
+        .required('El telefono es obligatorio.')
+        .matches(/^[0-9]{10}$/, 'El telefono debe tener 10 dígitos numéricos.'),
+        tipo: Yup.string().required("El rol es requerido")
 
 
-return{
-  LOGIN,
-  CLUB,
-  TEAM,
-  METODO,
-  SESION,
-  PLAYER,
-  LINK_PLAYER,
-  LESION,
-  PLAYER_LESION
-}
+
+      })
+    },
+    edit:{
+      initialValues:(values)=>({
+        nombre: values?.nombre ?? null,
+        apellido: values?.apellido?? null,
+        email: values?.email?? null,
+        documento: values?.documento?? null,
+        fecha_nacimiento: values?.fecha_nacimiento?? null,
+        telefono: values?.telefono?? null,
+        equipoId: values?.equipoId?? null,
+        tipo: values?.tipo?? null,
+        id:values?.id?? null,
+        equipo_id:values?.equipo_id?? null
+
+      }),
+      validationSchema:Yup.object().shape({
+        nombre: Yup.string()
+        .required('El nombre es obligatorio.')
+        .max(40, 'El nombre no debe contener mas de 40 caracteres.')
+        .min(2, 'El nombre debe contener mínimo 2 caracteres.'),
+        apellido: Yup.string()
+        .required('El apellido es obligatorio.')
+        .max(45, 'El apellido no puede contener más de 45 caracteres.')
+        .min(2, 'El apellido debe contener mínimo 2 caracteres.'),
+        email: Yup.string()
+        .email('Formato de email inválido.')
+        .required('El email es obligatorio.'),
+
+        documento: Yup.string()
+        .required('El documento es obligatorio.')
+        .matches(/^\d{10}$/, 'El documento debe tener 10 números.'),
+        fecha_nacimiento: Yup.string()
+        .required('La fecha de nacimiento es obligatoria.'),
+        fecha_nacimiento: Yup.string()
+        .required('La fecha de nacimiento es obligatoria.'),
+        telefono: Yup.string()
+        .required('El telefono es obligatorio.')
+        .matches(/^[0-9]{10}$/, 'El telefono debe tener 10 dígitos numéricos.'),
+        tipo: Yup.string().required("El rol es requerido")
+
+
+
+      })
+
+
+    },
+  }
+
+
+  return{
+    LOGIN,
+    CLUB,
+    TEAM,
+    PLAYER,
+    LINK_PLAYER,
+    LESION,
+    PLAYER_LESION,
+    STAFF
+  }
 }
 
 export default FormikValues
