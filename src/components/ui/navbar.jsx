@@ -34,12 +34,20 @@ const NavBar = () =>{
       to:"/adminPanel/clubes",
       text:"Clubes"
     },
+    {
+      to:"/adminPanel/lesiones",
+      text:"Lesiones"
+    },
   ]
 
   const menuItemsSidebar= [
     {
       to:"/adminPanel/clubes",
       text:"Clubes"
+    },
+    {
+      to:"/adminPanel/lesiones",
+      text:"Lesiones"
     },
     {
       to:"/adminPanel/entrenamientos",

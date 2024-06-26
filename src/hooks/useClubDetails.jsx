@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useClubs }from "@/hooks/useClubs";
 import useTeams from "@/hooks/useTeams";
 import { useParams } from "react-router-dom";
@@ -8,51 +8,65 @@ import { toast } from "react-hot-toast";
 
 const useClubDetails = () => {
   const { id } = useParams();
-  const club = useClubs();
+  const clubHook = useClubs();
   const team = useTeams();
   const { TEAM } = FormikValues();
   const { TEAM_INPUTS } = Inputs();
+  const [isLoading,setIsLoading] = useState(true)
 
   useEffect(() => {
-    club.fetchClubById(id);
-    club.fetchTeamsById(id);
-  }, [team.teams]);
+    
+    clubHook.fetchClubById(id);
+    clubHook.fetchTeamsById(id);
+    setIsLoading(false)
+  }, []);
 
 
   const onSubmit = {
     add: ({nombre,telefono,categoria,club,escudo}) =>{
       const file = escudo[0]
+      setIsLoading(true)
       toast.promise(
-        team.fetchAddTeam(nombre, telefono, categoria, club,file),
+        team.fetchAddTeam(nombre, telefono, categoria, id,file),
         {
           loading: 'Añadiendo Equipo',
           success: ()=>{
             team.setOpenAdd(false)
-            return'Equipo añadido con éxito 👌'},
-          error:(error)=> error+"",
+            clubHook.fetchTeamsById(id)
+            setIsLoading(false)
+            return 'Equipo añadido con éxito 👌'},
+          error:(error)=> error+"errororroororr",
         }
       )
     },
     edit:({iditem,nombre, telefono, categoria, club, escudo})=>{
       const file = escudo[0]
+      console.log(iditem,nombre,telefono,categoria,id,file)
+      setIsLoading(true)
       toast.promise(
-        team.fetchUpdateTeam(iditem,nombre,telefono, categoria, club,file),
+        team.fetchUpdateTeam(iditem,nombre,telefono, categoria, id,file),
         {
           loading:"Editando Equipo",
           success:()=>{
+            clubHook.fetchTeamsById(id)
             team.setOpenEdit(false)
+            setIsLoading(false)
             return "Equipo editado con éxito"
           },
           error:(error)=>error,
         }
       )
     },
-    delete: (id) =>{
+    delete: (id_team) =>{
+      setIsLoading(true)
       toast.promise(
-        team.fetchDeleteTeam(id),
+        team.fetchDeleteTeam(id_team),
         {
           loading:"Eliminando Equipo",
-          success:"Equipo eliminado con éxito 👌",
+          success:()=>{
+            clubHook.fetchTeamsById(id)
+            setIsLoading(false)
+            return "Equipo eliminado con éxito 👌"},
           error: (error) => error
         }
       )
@@ -76,8 +90,9 @@ const useClubDetails = () => {
   };
 
   return { 
-    club, 
+    clubHook, 
     team, 
+    isLoading,
     onSubmit, 
     formTexts, 
     images, 

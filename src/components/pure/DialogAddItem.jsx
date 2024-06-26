@@ -11,7 +11,7 @@ import Form from "../forms/Form";
 import { Button } from "../ui/button";
 
 
-const DialogAddItem = ({dataHook, formTexts, onSubmit, images, formValidation, inputs}) =>{
+const DialogAddItem = ({dataHook, formTexts, onSubmit, images, formValidation, inputs, styles}) =>{
 
   const buttonHandleClick = () =>{
     dataHook.setOpenAdd(true)
@@ -21,7 +21,7 @@ const DialogAddItem = ({dataHook, formTexts, onSubmit, images, formValidation, i
   return(
     <Dialog open={dataHook.openAdd} onOpenChange={dataHook.setOpenAdd}>
       <DialogTrigger asChild>
-        <Button onClick={()=>buttonHandleClick()}variant="outline"className="hover:bg-zinc-100 md:w-60 w-full">{formTexts.titleAdd}</Button>
+        <Button onClick={()=>buttonHandleClick()}variant="outline"className={`${styles?styles:"hover:bg-zinc-100 md:w-60 w-full"}`}>{formTexts.titleAdd}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

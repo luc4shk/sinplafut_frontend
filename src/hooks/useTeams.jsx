@@ -1,37 +1,23 @@
 import React, {useEffect, useState} from "react";
-import { getAllTeams, addTeam, updateTeam, deleteTeam, getTeamById} from "@/service/team";
+import { getAllTeams, addTeam, updateTeam, deleteTeam, getTeamById, getPlayersByTeam, getPlayersByState} from "@/service/team";
 
 const useTeams = () =>{
+  
+
 
   const [teams, setTeams] = useState([])
-  const [isLoading, setIsLoading] = useState(true);
+  const [teamPlayers, setTeamPlayers] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [values, setValues] = useState({});
   const [openAdd,setOpenAdd]= useState(false)
   const [openEdit,setOpenEdit]= useState(false)
 
-  useEffect(()=>{
-    fetchTeam()
-  },[])
-
-  const fetchTeam = async () =>{
-      try {
-      setIsLoading(true)
-      const response = await getAllTeams();
-      setTeams(response.data.data);
-    } catch (error) {
-      console.error("Error fetching teams:", error);
-      throw error.response.data.message
-    } finally {
-      setIsLoading(false);
-    }
   
-  } 
 
   const fetchAddTeam = async (nombre, telefono, categoria, clubId, escudoTeam) => {
     try {
       await addTeam(nombre, telefono, categoria, clubId, escudoTeam);
-      await fetchTeam();
     } catch (error) {
       console.error("Error adding team:", error);
       throw error.response.data.message
@@ -41,7 +27,6 @@ const useTeams = () =>{
   const fetchUpdateTeam = async (id,nombre, telefono, categoria, clubId, escudoTeam)=>{
     try{
       await updateTeam(id,nombre, telefono, categoria, clubId, escudoTeam)
-      await fetchTeam()
     }catch(error){
       console.log("Error updating team:", error)
       throw error.response.data.message
@@ -51,7 +36,6 @@ const useTeams = () =>{
   const fetchDeleteTeam = async (id) =>{
     try{
       await deleteTeam(id)
-      await fetchTeam()
     }catch(error){
       console.log("Error deleting team:", error)
       throw error.response.data.message
@@ -72,6 +56,34 @@ const useTeams = () =>{
 
   }
 
+  const fetchPlayersByTeam = async (id) =>{
+    try {
+      setIsLoading(true)
+      const response = await getPlayersByTeam(id);
+      setTeamPlayers(response.data.data);
+    } catch (error) {
+      console.error("Error fetching players by team:", error);
+      throw error.response.data.message
+    } finally {
+      setIsLoading(false);
+    }
+
+  } 
+
+  const fetchPlayersByState = async (id,estado) =>{
+    try {
+      setIsLoading(true)
+      const response = await getPlayersByState(id,estado);
+      console.log(response)
+      setTeamPlayers(response.data.data);
+    } catch (error) {
+      console.error("Error fetching players by state:", error);
+      throw error.response.data.message
+    } finally {
+      setIsLoading(false);
+    }
+
+  } 
 
 
   return{
@@ -83,10 +95,15 @@ const useTeams = () =>{
     fetchUpdateTeam,
     fetchDeleteTeam,
     fetchTeamById,
+    fetchPlayersByTeam,
+    fetchPlayersByState,
     openAdd,
     setOpenAdd,
     openEdit,
     setOpenEdit,
+    teamPlayers,
+    setTeamPlayers
+    
 
   }
 

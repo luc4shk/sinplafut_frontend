@@ -21,21 +21,10 @@ import SkeletonCard from "./SkeletonCard"
 const ItemCard = ({link,images,item_data,values,dataFromHook,titleDelete,titleEdit, descEdit,imagen, title, desc, itemId, onSubmit, buscarPorId, descDelete, item_info, inputs,withLink=false}) =>{
 
   return(
-    <Card className={"overflow-hidden"}>
-      <Palette src={imagen}>
-        {({ data, loading}) => (
-          loading ?
-            <CardHeader className="w-full  flex flex-row justify-between gap-4">
-              <div className="flex-row gap-4 flex items-center">
-                <Skeleton className={"w-16 h-16 rounded-full"}/>
-                <div>
-                  <Skeleton className={"w-32 h-4 "}/>
-                  <Skeleton className={"w-14 h-4 mt-2"}/>
-                </div>
-              </div>
-              <Skeleton className={"w-2 h-6 mr-2"}/>
-            </CardHeader>
-            :
+    <Palette src={imagen}>
+      {({ data, loading}) => (
+        !loading &&
+          <Card className={"overflow-hidden"}>
             <CardHeader className={`w-full  flex flex-row justify-between gap-4 z-index-0`} style={{ backgroundColor: data.darkMuted}}>
               <div className="flex-row gap-4 flex items-center">
                 <Avatar className="flex items-center p-2 w-16 h-16 border border-white">
@@ -72,17 +61,18 @@ const ItemCard = ({link,images,item_data,values,dataFromHook,titleDelete,titleEd
                 iconColor={"white"}
               />
             </CardHeader>
-        )}
-      </Palette>
-      <Separator/>
-      <CardContent className="flex flex-col mt-6 gap-4">
-        {
-          item_info.map((item, index) => (
-            <ClubInfoItem key={index} icon={item.icon} text={item.text(item_data)}/>
-          ))
-        }
-      </CardContent>
-    </Card>
+            <Separator/>
+            <CardContent className="flex flex-col mt-6 gap-4">
+              {
+                item_info.map((item, index) => (
+                  <ClubInfoItem key={index} icon={item.icon} text={item.text(item_data)}/>
+                ))
+              }
+            </CardContent>
+          </Card>
+      )}
+    </Palette>
+
 
   )
 }

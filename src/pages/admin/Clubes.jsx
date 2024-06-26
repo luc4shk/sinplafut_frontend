@@ -5,6 +5,11 @@ import { toast } from "react-hot-toast";
 import CardList from "@/components/pure/CardList";
 import { CLUB_INFO } from "@/constants/InfoCards";
 import { Inputs } from "@/constants/Inputs";
+import SkeletonCard from "@/components/pure/SkeletonCard";
+import Container from "@/components/ui/container";
+import Spinner from "@/components/ui/spinner";
+import {Skeleton} from "@/components/ui/skeleton";
+import {Button} from "@/components/ui/button";
 
 const Clubes = () =>{
 
@@ -17,6 +22,7 @@ const Clubes = () =>{
     form:"imagen",
     data:"logoUrl"
   }
+
 
   const onSubmit={
     add:({nombre, direccion, telefono, ciudad, pais, estadio,imagen})=>{
@@ -34,7 +40,6 @@ const Clubes = () =>{
     },
     edit:({iditem,nombre, direccion, telefono, ciudad, pais, estadio,imagen})=>{
       const file = imagen[0]
-      console.log("aaaa",iditem,nombre, direccion, telefono, ciudad, pais, estadio,file)
       toast.promise(
         club.fetchUpdateClub(iditem,nombre, direccion, telefono, ciudad, pais, estadio,file),
         {
@@ -73,19 +78,34 @@ const Clubes = () =>{
 
   return(
     <>
-      <CardList
-        dataFromHook={club}
-        data={club.clubes}
-        formValidation={CLUB}
-        formTexts={formTexts}
-        onSubmit={onSubmit}
-        buscarPorId={club.fetchClubById}
-        item_info={CLUB_INFO}
-        images={images}
-        inputs={CLUB_INPUTS}
-        withLink
-        link={"/adminPanel/clubes/"}
-      />
+      {
+        club.isLoading? 
+          <Container>
+              <Button variant={"outline"} className={"md:w-60 w-full h-10"}>
+              <Skeleton className={"w-16 h-4"}/>
+              </Button>
+            <div className="grid  mt-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {
+                Array.from({length:8}).map((_,i)=>(
+                  <SkeletonCard key={i}/>
+                ))} 
+            </div>
+          </Container>
+          :
+          <CardList
+            dataFromHook={club}
+            data={club.clubes}
+            formValidation={CLUB}
+            formTexts={formTexts}
+            onSubmit={onSubmit}
+            buscarPorId={club.fetchClubById}
+            item_info={CLUB_INFO}
+            images={images}
+            inputs={CLUB_INPUTS}
+            withLink
+            link={"/adminPanel/clubes/"}
+          />
+      }
     </>
   )
 

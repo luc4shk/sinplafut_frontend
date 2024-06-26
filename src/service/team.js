@@ -70,6 +70,26 @@ const updateTeam = async (id, nombre, telefono, categoria, clubId, escudoTeam) =
   }
 }
 
+const getPlayersByTeam = async (id) => {
+  try {
+    const response = await team.get(`/findJugador/${id}`)
+    return response
+  }
+  catch (e) {
+    throw e
+  }
+}
+
+const getPlayersByState = async (id, estado) => {
+  try {
+    const response = await team.get(`/findJugadorByEstado/${id}/estado/${estado}`)
+    return response
+  }
+  catch (e) {
+    throw e
+  }
+}
+
 
 
 
@@ -77,6 +97,8 @@ const updateTeam = async (id, nombre, telefono, categoria, clubId, escudoTeam) =
 export {
   getAllTeams,
   getTeamById,
+  getPlayersByTeam,
+  getPlayersByState,
   addTeam,
   deleteTeam,
   updateTeam

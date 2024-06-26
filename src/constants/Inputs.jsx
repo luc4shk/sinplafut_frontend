@@ -1,17 +1,8 @@
 import React from "react"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { useClubs } from "@/hooks/useClubs"
-import {club} from "@/service/axios"
-import Entrenamientos from "@/pages/admin/Entrenamientos"
-import {useSession} from "@/hooks/useSession"
 import { useMethods } from "@/hooks/useMethods"
 import useTeams from "@/hooks/useTeams"
+import useLesions from "@/hooks/useLesions"
 
 
 export const Inputs = () =>{
@@ -19,6 +10,10 @@ export const Inputs = () =>{
   const { clubes } = useClubs()
   const { metodos } = useMethods()
   const { teams } = useTeams()
+  const { lesions } = useLesions()
+  console.log("INPUTS clubes",clubes)
+  console.log("INPUTS metodos",metodos)
+  console.log("INPUTS teams",teams)
 
   const TEAM_INPUTS = [
     {
@@ -54,7 +49,7 @@ export const Inputs = () =>{
       name:"club",
       place:"Club",
       estilosSel:"w-full border rounded-md p-2",
-      estilos:"col-span-2",
+      estilos:"hidden",
       element:
         <>
           <option value={""} selected disabled hidden>Club</option>
@@ -262,8 +257,8 @@ export const Inputs = () =>{
         <>
           <option value={""} selected disabled hidden>Seleccion el equipo</option>
           {teams.map((item,i)=>(
-        <option key={i} value={item.id}>{item.nombre}</option>
-      ))}
+            <option key={i} value={item.id}>{item.nombre}</option>
+          ))}
         </>
     },
     {
@@ -290,12 +285,260 @@ export const Inputs = () =>{
 
   ]
 
+  const PLAYER_INPUTS = [
+    {
+      name: "nombre",
+      type: "text",
+      place: "Nombre"
+    },
+    {
+      name: "apellido",
+      type: "text",
+      place: "Apellido"
+    },
+    {
+      name: "fecha_nacimiento",
+      type: "date",
+    },
+    {
+      name: "documento",
+      type: "text",
+      place: "Documento"
+    },
+    {
+      name: "email",
+      type: "email",
+      place: "Email"
+    },
+    {
+      name: "direccion",
+      type: "text",
+      place: "Dirección"
+    },
+    {
+      name: "celular",
+      type: "text",
+      place: "Celular"
+    },
+    {
+      name: "numero_camiseta",
+      type: "text",
+      place: "Número de Camiseta"
+    },
+    {
+      isSelect:true,
+      name: "tipo_sangre",
+      estilosSel:"w-full border rounded-md p-2",
+      estilos:"col-span-2",
+      element:
+        <>        
+          <option value={""} selected disabled hidden>Tipo de Sangre</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </>
+
+
+    },
+    {
+      name: "nivel_hemoglobina",
+      type: "text",
+      place: "Nivel de Hemoglobina"
+    },
+    {
+      name: "consumo_o2",
+      type: "text",
+      place: "Consumo de Oxígeno"
+    },
+    {
+      name: "lactato_sangre",
+      type: "text",
+      place: "Lactato en Sangre",
+      estilos:"col-span-2",
+    },
+    {
+      name: "equipoId",
+      estilos:"hidden"
+    }
+  ];
+
+  const PLAYER_INPUTS_EDIT= [
+    {
+      name: "nombre",
+      type: "text",
+      place: "Nombre"
+    },
+    {
+      name: "apellido",
+      type: "text",
+      place: "Apellido"
+    },
+    {
+      name: "fecha_nacimiento",
+      type: "date",
+    },
+    {
+      name: "documento",
+      type: "text",
+      place: "Documento"
+    },
+    {
+      name: "email",
+      type: "email",
+      estilos:"col-span-2",
+      place: "Email"
+    },
+    {
+      name: "direccion",
+      type: "text",
+      place: "Dirección"
+    },
+    {
+      name: "celular",
+      type: "text",
+      place: "Celular"
+    },
+
+    {
+      isSelect:true,
+      name: "estado",
+      estilosSel:"w-full border rounded-md p-2",
+      element:
+        <>        
+          <option value="activo">Activo</option>
+          <option value="lesionado">Lesionado</option>
+          <option value="retirado">Retirado</option>
+        </>
+
+    },
+    {
+      isSelect:true,
+      name: "tipo_sangre",
+      estilosSel:"w-full border rounded-md p-2",
+      element:
+        <>        
+          <option value={""} selected disabled hidden>Tipo de Sangre</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </>
+
+
+    },
+    {
+      name: "numero_camiseta",
+      type: "text",
+      place: "Número de Camiseta"
+    },
+    {
+      name: "nivel_hemoglobina",
+      type: "text",
+      place: "Nivel de Hemoglobina"
+    },
+    {
+      name: "consumo_o2",
+      type: "text",
+      place: "Consumo de Oxígeno"
+    },
+    {
+      name: "lactato_sangre",
+      type: "text",
+      place: "Lactato en Sangre",
+    },
+    {
+      name: "equipoId",
+      estilos:"hidden"
+    }
+  ];
+
+  const LINK_PLAYER_INPUTS= [
+    {
+      name: "email",
+      type: "text",
+      place: "Correo",
+      estilos:"col-span-2"
+    },
+    {
+      name: "equipoId",
+      estilos:"hidden"
+    }
+  ]
+
+  const LESION_INPUTS = [
+    {
+      name: "nombre",
+      type: "text",
+      place:"Nombre",
+      estilos:"col-span-2",
+    },
+    {
+      name: "tratamiento",
+      type: "text",
+      place:"Tratamiento",
+      estilos:"col-span-2",
+    },
+    {
+      name: "observaciones",
+      type: "text",
+      place:"Observaciones",
+      estilos:"col-span-2",
+    },
+    {
+      name:"id",
+      estilos:"hidden"
+    }
+  ]
+
+  const PLAYER_LESION_INPUTS = [
+    {
+      isSelect:true,
+      name:"lesionId",
+      estilosSel:"w-full border rounded-md p-2",
+      estilos:"col-span-2",
+      element:
+        <>        
+          <option value={""} selected disabled hidden>Lesión</option>
+          {
+            lesions.map((lesion,i)=>(
+              <option key={i} value={lesion.id}>{lesion.nombre}</option>
+            ))
+          }
+        </>
+
+    },
+    {
+      name:"fecha_inicio",
+      type:"date",
+    },
+    {
+      name:"fecha_fin",
+      type:"date",
+    },
+  ]
+
+
+
   return{
     TEAM_INPUTS,
     CLUB_INPUTS,
     METODO_INPUTS,
     METODO_INPUTS_EDIT,
-    SESION_INPUTS
+    SESION_INPUTS,
+    PLAYER_INPUTS,
+    PLAYER_INPUTS_EDIT,
+    LINK_PLAYER_INPUTS,
+    LESION_INPUTS,
+    PLAYER_LESION_INPUTS
   }
 
 }

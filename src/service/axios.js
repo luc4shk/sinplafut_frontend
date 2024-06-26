@@ -46,6 +46,15 @@ const jugador = axios.create({
   }
 })
 
+//Creamos la instacia para las lesiones
+const lesion = axios.create({
+  baseURL: "http://localhost:8080/jugador-service/lesion",
+  timeout: 20000,
+  headers: {
+    "Content-Type": "application/json",
+  }
+})
+
 
 //Exportamos las instancias para que sean accesbiles
 export {
@@ -53,5 +62,6 @@ export {
   team,
   metodo,
   sesion,
-  jugador
+  jugador,
+  lesion
 }

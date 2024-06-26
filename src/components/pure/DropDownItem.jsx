@@ -29,7 +29,7 @@ import {
 import Form from "../forms/Form"
 import {EllipsisVertical} from "lucide-react"
 
-const DropDownItem = ({images,titleEdit, descEdit,titleDelete,descDelete,itemId,dataFromHook, values, onSubmit, buscarPorId, inputs,iconColor}) =>{
+const DropDownItem = ({images,titleEdit, descEdit,titleDelete,descDelete,itemId,dataFromHook, values, onSubmit, buscarPorId, inputs,iconColor,hasChildren, children, withDeleteMessage=false,deleteMessage}) =>{
 
 
 
@@ -43,6 +43,7 @@ const DropDownItem = ({images,titleEdit, descEdit,titleDelete,descDelete,itemId,
       <DropdownMenuContent className=" md:mr-[55px]  mr-[35px]">
         <DropdownMenuLabel>Acciones</DropdownMenuLabel>
         <DropdownMenuSeparator/>
+        {hasChildren&&children}
         <Dialog  
           open={dataFromHook.openEdit}
           onOpenChange={dataFromHook.setOpenEdit}
@@ -81,7 +82,7 @@ const DropDownItem = ({images,titleEdit, descEdit,titleDelete,descDelete,itemId,
             <AlertDialogHeader>
               <AlertDialogTitle>{titleDelete}</AlertDialogTitle>
               <AlertDialogDescription>
-                {descDelete}<b>{dataFromHook.values.nombre}</b>
+                {descDelete}<b>{withDeleteMessage?deleteMessage:dataFromHook.values.nombre}</b>
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

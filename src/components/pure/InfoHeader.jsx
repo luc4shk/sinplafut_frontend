@@ -9,13 +9,14 @@ const InfoHeader = ({imagen,title,description, children}) =>{
         <PaletteImage 
           imagen={imagen} 
           title={title} 
-          description={description}/>
+          description={description}>
           <CardContent className="sm:ml-[135px] ml-0 sm:mt-4 mt-16 sm:gap-8 gap-2 sm:flex-row flex-col flex w-full">
-        {children}
+            {children}
           </CardContent>
+
+        </PaletteImage>
       </Card>
     </div>
-
   )
 }
 
